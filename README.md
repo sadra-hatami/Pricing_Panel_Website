@@ -135,6 +135,6 @@ Your support helps the project reach more developers and encourages future impro
 
 <div align="center">
 
-### Made with ❤️ by **Sadra Hatami**
+### Made with ❤️ for the developer community in Iran and the world by **Sadra Hatami**
 
 </div>
