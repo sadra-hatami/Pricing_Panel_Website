@@ -29,3 +29,112 @@
 ---
 
 </div>
+
+## 📖 About
+
+**HTML Encyclopedia** is a comprehensive educational website designed to serve as a complete reference for HTML.
+
+The project documents more than **150 HTML tags**, covering the entire evolution of HTML—from classic and widely used elements to rare, deprecated, and obsolete tags.
+
+Each documented tag includes:
+
+* 📌 Detailed explanation
+* 🏷️ Supported attributes
+* 💡 Practical code examples
+* 📖 Usage notes
+* ✅ Best practices
+
+Whether you're learning HTML for the first time or looking for a reliable reference, this project is designed to be your all-in-one resource.
+
+---
+
+## ✨ Features
+
+* 📚 24 well-organized chapters
+* 🏷️ 150+ documented HTML tags
+* 🧩 Complete attribute reference
+* 💡 Extensive practical examples
+* ⚠️ Deprecated & obsolete HTML elements
+* 🎨 Modern, responsive, and user-friendly interface
+* ⚡ Fast and lightweight
+* 📖 Designed for both learning and quick reference
+
+---
+
+## 📸 Preview
+
+> Add screenshots of your website here.
+
+```text
+assets/
+├── home.png
+├── navigation.png
+└── tag-reference.png
+```
+
+---
+
+## 🛠️ Built With
+
+* HTML5
+* CSS3
+* JavaScript
+
+---
+
+## 🚀 Live Demo
+
+**Website:**
+https://sadra-hatami.github.io/Prompt_Builder_Website/
+
+---
+
+## 📂 Project Structure
+
+```text
+HTML-Encyclopedia/
+│
+├── index.html
+├── style.css
+├── script.js
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── screenshots/
+│
+└── README.md
+```
+
+---
+
+## 🎯 Target Audience
+
+* Students
+* Beginner Web Developers
+* Front-end Developers
+* Self-learners
+* Anyone looking for a complete HTML reference
+
+---
+
+## 📬 Contact
+
+**Sadra Hatami**
+
+📧 Email: **[sadra.hatami.1732@gmail.com](mailto:sadra.hatami.1732@gmail.com)**
+
+---
+
+## ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Your support helps the project reach more developers and encourages future improvements.
+
+---
+
+<div align="center">
+
+### Made with ❤️ by **Sadra Hatami**
+
+</div>
