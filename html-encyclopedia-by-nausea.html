@@ -1,0 +1,2276 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="دایره‌المعارف کامل HTML — تمام تگ‌ها از صفر تا صد، شامل تگ‌های معروف، نادر، منقضی و حذف‌شده">
+<meta name="author" content="nausea">
+<meta name="theme-color" content="#0a0e1a">
+<title>⚡ دایره‌المعارف کامل HTML | by nausea</title>
+<style>
+/* ════════════════════════════════════════════════════════════
+   متغیرهای رنگی — تم Neo-Dark Cyberpunk Pro
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --bg-deep:      #070b16;
+  --bg-deep-2:    #0a0e1a;
+  --bg-panel:     #0e1424;
+  --bg-panel-2:   #141b2e;
+  --bg-glass:     rgba(20, 27, 46, 0.55);
+  --bg-code:      #0b1020;
+  --border:       #1c2740;
+  --border-2:     #2a3a5e;
+
+  --neon-cyan:    #22d3ee;
+  --neon-pink:    #f472b6;
+  --neon-purple:  #a78bfa;
+  --neon-blue:    #60a5fa;
+  --neon-yellow:  #fbbf24;
+  --neon-green:   #34d399;
+  --neon-orange:  #fb923c;
+  --neon-red:     #f87171;
+
+  --text-main:    #dce3f0;
+  --text-dim:     #8896b0;
+  --text-bright:  #f8fafc;
+
+  --radius:       16px;
+  --radius-sm:    10px;
+  --glow-cyan:    0 0 25px rgba(34, 211, 238, 0.25);
+  --glow-purple:  0 0 25px rgba(167, 139, 250, 0.25);
+  --font-main:    'Vazirmatn', 'Vazir', 'Segoe UI', Tahoma, sans-serif;
+  --font-code:    'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* ════════════════════════════════════════════════════════════
+   ریست
+   ════════════════════════════════════════════════════════════ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-deep);
+  color: var(--text-main);
+  line-height: 1.95;
+  font-size: 16px;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* پس‌زمینه چندلایه پویا */
+.bg-fx {
+  position: fixed; inset: 0; z-index: -3; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(167, 139, 250, 0.15), transparent),
+    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(34, 211, 238, 0.1), transparent),
+    radial-gradient(ellipse 60% 50% at 0% 100%, rgba(244, 114, 182, 0.08), transparent),
+    var(--bg-deep);
+}
+.bg-grid {
+  position: fixed; inset: 0; z-index: -2; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.025) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 100% 80% at 50% 30%, black 40%, transparent 90%);
+}
+/* ذرات شناور */
+.particle {
+  position: fixed; border-radius: 50%; z-index: -1; pointer-events: none;
+  background: var(--neon-cyan); opacity: 0.4;
+  animation: float-up linear infinite;
+  box-shadow: 0 0 8px currentColor;
+}
+@keyframes float-up {
+  from { transform: translateY(100vh) scale(0); opacity: 0; }
+  10%  { opacity: 0.5; }
+  90%  { opacity: 0.5; }
+  to   { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* ════════════════════════════════════════════════════════════
+   اسکرول‌بار
+   ════════════════════════════════════════════════════════════ */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-deep-2); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--neon-cyan), var(--neon-purple));
+  border-radius: 10px; border: 3px solid var(--bg-deep-2);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--neon-pink); }
+::selection { background: rgba(34, 211, 238, 0.3); color: var(--text-bright); }
+
+/* ════════════════════════════════════════════════════════════
+   چیدمان
+   ════════════════════════════════════════════════════════════ */
+.layout { display: flex; min-height: 100vh; }
+
+/* ----- نوار کناری ----- */
+.sidebar {
+  width: 320px;
+  background: var(--bg-panel);
+  border-left: 1px solid var(--border);
+  position: fixed; top: 0; right: 0; bottom: 0;
+  overflow-y: auto; z-index: 100;
+  padding: 0 0 40px;
+  transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+  backdrop-filter: blur(10px);
+}
+.sidebar-top {
+  position: sticky; top: 0; z-index: 5;
+  background: var(--bg-panel);
+  padding: 22px 18px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-brand {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 1.35rem; font-weight: 800;
+  margin-bottom: 16px;
+}
+.sidebar-brand .logo {
+  font-size: 1.9rem;
+  filter: drop-shadow(0 0 10px var(--neon-cyan));
+  animation: pulse 3s ease-in-out infinite;
+}
+@keyframes pulse { 50% { filter: drop-shadow(0 0 18px var(--neon-cyan)); } }
+.brand-text {
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.brand-sub { font-size: 0.65rem; color: var(--text-dim); font-weight: 400; display:block; }
+
+/* جعبه جستجو */
+.search-box { position: relative; }
+.search-box input {
+  width: 100%;
+  background: var(--bg-code);
+  border: 1px solid var(--border-2);
+  border-radius: 12px;
+  padding: 10px 38px 10px 14px;
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.search-box input:focus {
+  outline: none; border-color: var(--neon-cyan);
+  box-shadow: var(--glow-cyan);
+}
+.search-box .s-icon {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  color: var(--text-dim); pointer-events: none;
+}
+.search-count {
+  font-size: 0.7rem; color: var(--neon-cyan); padding: 6px 4px 0; display: none;
+}
+
+.nav-scroll { padding: 8px 14px; }
+.nav-section-title {
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--neon-cyan); padding: 18px 12px 8px;
+  font-weight: 700; opacity: 0.85;
+  display: flex; align-items: center; gap: 8px;
+}
+.nav-section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+.nav-link {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 12px; color: var(--text-dim);
+  text-decoration: none; border-radius: 10px;
+  font-size: 0.88rem; transition: all 0.2s ease;
+  margin-bottom: 2px; border-right: 3px solid transparent;
+}
+.nav-link:hover {
+  background: var(--bg-panel-2); color: var(--text-bright);
+  border-right-color: var(--neon-cyan); transform: translateX(-5px);
+}
+.nav-link.active {
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.14));
+  color: var(--neon-cyan); border-right-color: var(--neon-cyan);
+}
+.nav-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 28px; height: 28px; font-size: 0.72rem; font-weight: 700;
+  background: var(--bg-code); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--neon-purple);
+}
+
+/* ----- محتوای اصلی ----- */
+.main { margin-right: 320px; flex: 1; padding: 0 5vw 100px; max-width: 1180px; }
+
+/* ----- دکمه منو ----- */
+.menu-toggle {
+  display: none; position: fixed; top: 16px; right: 16px; z-index: 200;
+  background: var(--bg-glass); backdrop-filter: blur(12px);
+  border: 1px solid var(--neon-cyan); color: var(--neon-cyan);
+  width: 50px; height: 50px; border-radius: 14px;
+  font-size: 1.4rem; cursor: pointer; box-shadow: var(--glow-cyan);
+}
+.overlay {
+  display: none; position: fixed; inset: 0; z-index: 99;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(2px);
+}
+.overlay.show { display: block; }
+
+/* ════════════════════════════════════════════════════════════
+   هیرو
+   ════════════════════════════════════════════════════════════ */
+.hero { text-align: center; padding: 100px 20px 70px; position: relative; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 20px; background: var(--bg-glass); backdrop-filter: blur(10px);
+  border: 1px solid var(--neon-cyan); border-radius: 30px;
+  color: var(--neon-cyan); font-size: 0.85rem; margin-bottom: 28px;
+  box-shadow: var(--glow-cyan); animation: badge-glow 3s ease-in-out infinite;
+}
+@keyframes badge-glow { 50% { box-shadow: 0 0 35px rgba(34, 211, 238, 0.5); } }
+.hero h1 { font-size: clamp(2.2rem, 7vw, 5rem); font-weight: 900; line-height: 1.25; margin-bottom: 24px; letter-spacing: -1px; }
+.gradient-text {
+  background: linear-gradient(120deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink), var(--neon-cyan));
+  background-size: 300% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; animation: shine 5s linear infinite;
+}
+@keyframes shine { to { background-position: 300% center; } }
+.hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 700px; margin: 0 auto 36px; }
+.hero-stats { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 44px; }
+.stat {
+  background: var(--bg-glass); backdrop-filter: blur(12px);
+  border: 1px solid var(--border-2); border-radius: 18px;
+  padding: 22px 30px; min-width: 130px; transition: all 0.3s;
+}
+.stat:hover { transform: translateY(-6px); border-color: var(--neon-cyan); box-shadow: var(--glow-cyan); }
+.stat-num { font-size: 2.2rem; font-weight: 900; background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 0.82rem; color: var(--text-dim); }
+.signed-by {
+  margin-top: 50px; font-size: 0.9rem; color: var(--text-dim);
+}
+.signed-by b {
+  background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  font-weight: 800; letter-spacing: 1px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   فصل‌ها
+   ════════════════════════════════════════════════════════════ */
+.chapter {
+  background: var(--bg-glass); backdrop-filter: blur(14px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 44px; margin-bottom: 44px; position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(30px);
+}
+.chapter.visible { animation: fadeUp 0.7s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.chapter::before {
+  content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-purple), var(--neon-pink));
+}
+.chapter-header { display: flex; align-items: center; gap: 18px; margin-bottom: 28px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+.chapter-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 60px; height: 60px; font-size: 1.5rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: var(--bg-deep); border-radius: 16px; box-shadow: var(--glow-cyan);
+}
+.chapter-header h2 { font-size: clamp(1.4rem, 3.5vw, 2.1rem); color: var(--text-bright); }
+.chapter-header .sub { font-size: 0.92rem; color: var(--text-dim); font-weight: 400; }
+
+.chapter h3 { font-size: 1.4rem; color: var(--neon-cyan); margin: 40px 0 16px; display: flex; align-items: center; gap: 10px; scroll-margin-top: 24px; }
+.chapter h3::before { content: '▹'; color: var(--neon-pink); }
+.chapter h4 { font-size: 1.12rem; color: var(--neon-purple); margin: 26px 0 12px; }
+.chapter p { margin-bottom: 15px; }
+.chapter ul, .chapter ol { margin: 0 24px 18px 0; }
+.chapter li { margin-bottom: 9px; }
+.chapter a { color: var(--neon-blue); text-decoration: none; border-bottom: 1px dashed var(--neon-blue); }
+.chapter a:hover { color: var(--neon-cyan); border-bottom-style: solid; }
+
+.kw {
+  font-family: var(--font-code); background: var(--bg-code); color: var(--neon-pink);
+  padding: 2px 8px; border-radius: 6px; font-size: 0.86em;
+  border: 1px solid var(--border); direction: ltr; display: inline-block;
+}
+
+/* ════════════════════════════════════════════════════════════
+   کارت تگ — جزء اصلی دایره‌المعارف
+   ════════════════════════════════════════════════════════════ */
+.tag-card {
+  background: var(--bg-panel); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); margin: 22px 0; overflow: hidden;
+  transition: all 0.3s; position: relative;
+}
+.tag-card:hover { border-color: var(--border-2); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+.tag-card-head {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 12px;
+  padding: 16px 20px; background: var(--bg-panel-2);
+  border-bottom: 1px solid var(--border);
+}
+.tag-name {
+  font-family: var(--font-code); font-size: 1.15rem; font-weight: 700;
+  color: var(--neon-cyan); direction: ltr;
+}
+.tag-pill {
+  font-size: 0.68rem; padding: 3px 10px; border-radius: 20px;
+  font-weight: 700; letter-spacing: 0.3px;
+}
+.pill-empty   { background: rgba(96,165,250,0.15); color: var(--neon-blue); border: 1px solid var(--neon-blue); }
+.pill-inline  { background: rgba(52,211,153,0.15); color: var(--neon-green); border: 1px solid var(--neon-green); }
+.pill-block   { background: rgba(167,139,250,0.15); color: var(--neon-purple); border: 1px solid var(--neon-purple); }
+.pill-meta    { background: rgba(251,191,36,0.15); color: var(--neon-yellow); border: 1px solid var(--neon-yellow); }
+.pill-dep     { background: rgba(251,146,60,0.15); color: var(--neon-orange); border: 1px solid var(--neon-orange); }
+.pill-obs     { background: rgba(248,113,113,0.15); color: var(--neon-red); border: 1px solid var(--neon-red); }
+.tag-desc-head { flex: 1 1 100%; color: var(--text-dim); font-size: 0.9rem; }
+.tag-card-body { padding: 18px 20px; }
+.tag-card-body p:last-child { margin-bottom: 0; }
+
+/* ════════════════════════════════════════════════════════════
+   بلوک کد
+   ════════════════════════════════════════════════════════════ */
+.code-block { background: var(--bg-code); border: 1px solid var(--border); border-radius: 12px; margin: 16px 0; overflow: hidden; direction: ltr; }
+.code-head { display: flex; align-items: center; justify-content: space-between; padding: 9px 16px; background: var(--bg-panel-2); border-bottom: 1px solid var(--border); }
+.code-dots { display: flex; gap: 6px; }
+.code-dots span { width: 12px; height: 12px; border-radius: 50%; display: block; }
+.dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+.code-lang { font-family: var(--font-code); font-size: 0.76rem; color: var(--text-dim); }
+.code-block pre { padding: 18px; overflow-x: auto; font-family: var(--font-code); font-size: 0.86rem; line-height: 1.75; }
+.code-block code { font-family: var(--font-code); color: #cbd5e1; }
+.tag { color: var(--neon-pink); } .attr { color: var(--neon-yellow); } .val { color: var(--neon-green); }
+.cmt { color: #5a6a86; font-style: italic; } .txt { color: var(--text-main); }
+
+/* ════════════════════════════════════════════════════════════
+   جعبه‌ها
+   ════════════════════════════════════════════════════════════ */
+.box { border-radius: 12px; padding: 18px 22px; margin: 20px 0; border-right: 4px solid; position: relative; }
+.box-title { font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; font-size: 1rem; }
+.box-tip    { background: rgba(52,211,153,0.07); border-color: var(--neon-green); }   .box-tip .box-title    { color: var(--neon-green); }
+.box-warn   { background: rgba(251,146,60,0.07); border-color: var(--neon-orange); }  .box-warn .box-title   { color: var(--neon-orange); }
+.box-note   { background: rgba(96,165,250,0.07); border-color: var(--neon-blue); }    .box-note .box-title   { color: var(--neon-blue); }
+.box-danger { background: rgba(248,113,113,0.07); border-color: var(--neon-red); }    .box-danger .box-title { color: var(--neon-red); }
+.box-future { background: linear-gradient(135deg, rgba(167,139,250,0.1), rgba(244,114,182,0.06)); border-color: var(--neon-purple); } .box-future .box-title { color: var(--neon-purple); }
+
+/* جداول */
+.ref-table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.85rem; direction: ltr; }
+.ref-table th, .ref-table td { border: 1px solid var(--border); padding: 9px 13px; text-align: left; vertical-align: top; }
+.ref-table th { background: var(--bg-panel-2); color: var(--neon-purple); position: sticky; }
+.ref-table td:first-child { font-family: var(--font-code); color: var(--neon-pink); white-space: nowrap; }
+.ref-table tr:hover td { background: rgba(255,255,255,0.02); }
+.attr-table td:first-child { color: var(--neon-yellow); }
+
+/* خروجی زنده */
+.live-demo { background: #fff; color: #1a1a1a; border-radius: 12px; padding: 24px 20px 20px; margin: 16px 0; border: 2px dashed var(--neon-cyan); position: relative; }
+.live-label { font-size: 0.72rem; color: var(--neon-cyan); background: var(--bg-code); display: inline-block; padding: 4px 12px; border-radius: 6px; position: absolute; top: -13px; right: 14px; border: 1px solid var(--neon-cyan); }
+
+/* نوار پیشرفت */
+.progress-bar { position: fixed; top: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink)); z-index: 300; width: 0%; box-shadow: 0 0 12px var(--neon-cyan); transition: width 0.1s; }
+
+/* فوتر */
+.footer { text-align: center; padding: 60px 20px; color: var(--text-dim); border-top: 1px solid var(--border); margin-top: 50px; }
+.footer .gradient-text { font-size: 1.4rem; font-weight: 800; }
+.footer .sig { margin-top: 18px; font-size: 1rem; }
+.footer .sig b { background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; letter-spacing: 2px; }
+
+/* دکمه بالا */
+.to-top { position: fixed; bottom: 24px; left: 24px; width: 52px; height: 52px; background: var(--bg-glass); backdrop-filter: blur(10px); border: 1px solid var(--neon-cyan); color: var(--neon-cyan); border-radius: 14px; font-size: 1.3rem; cursor: pointer; z-index: 150; opacity: 0; visibility: hidden; transition: all 0.3s; box-shadow: var(--glow-cyan); }
+.to-top.show { opacity: 1; visibility: visible; }
+.to-top:hover { background: var(--neon-cyan); color: var(--bg-deep); transform: scale(1.1); }
+
+/* پیام عدم یافتن جستجو */
+.no-results { text-align: center; padding: 40px; color: var(--text-dim); display: none; }
+.search-hidden { display: none !important; }
+mark.hl { background: var(--neon-yellow); color: #1a1a1a; padding: 0 2px; border-radius: 3px; }
+
+/* ════════════════════════════════════════════════════════════
+   ریسپانسیو
+   ════════════════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .sidebar { transform: translateX(100%); width: 300px; box-shadow: -10px 0 40px rgba(0,0,0,0.5); }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-right: 0; }
+  .menu-toggle { display: flex; align-items: center; justify-content: center; }
+}
+@media (max-width: 768px) {
+  body { font-size: 15px; }
+  .chapter { padding: 28px 18px; border-radius: 12px; }
+  .hero { padding: 80px 16px 50px; }
+  .chapter-header { gap: 12px; }
+  .chapter-badge { min-width: 48px; height: 48px; font-size: 1.2rem; }
+  .tag-card-head { padding: 14px 16px; }
+  .code-block pre { font-size: 0.78rem; padding: 14px; }
+  .ref-table { font-size: 0.78rem; }
+  .ref-table th, .ref-table td { padding: 7px 9px; }
+}
+@media (max-width: 480px) {
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
+  .stat { padding: 16px 20px; min-width: 100px; }
+  .stat-num { font-size: 1.7rem; }
+  .to-top { bottom: 16px; left: 16px; width: 46px; height: 46px; }
+  .chapter h3 { font-size: 1.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+/* ===== Sign-off card ===== */
+.signoff {
+  position: relative;
+  margin-top: 40px;
+  padding: 48px 36px;
+  text-align: center;
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(0,229,255,0.08), rgba(168,85,247,0.10));
+  border: 1px solid rgba(0,229,255,0.25);
+  overflow: hidden;
+  box-shadow: 0 0 60px rgba(0,229,255,0.15), inset 0 0 40px rgba(168,85,247,0.06);
+}
+.signoff-glow {
+  position: absolute;
+  top: -60%; left: 50%;
+  width: 420px; height: 420px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(0,229,255,0.30), transparent 70%);
+  filter: blur(40px);
+  pointer-events: none;
+  animation: floatGlow 6s ease-in-out infinite;
+}
+@keyframes floatGlow { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(20px);} }
+.signoff h3 {
+  position: relative;
+  font-size: 1.8rem;
+  margin-bottom: 14px;
+  background: linear-gradient(90deg, #00e5ff, #a855f7, #00e5ff);
+  background-size: 200% auto;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+@keyframes shimmer { to { background-position: 200% center; } }
+.signoff p {
+  position: relative;
+  max-width: 620px; margin: 0 auto 26px;
+  color: #b8c0e0; line-height: 2;
+}
+.signoff-author {
+  position: relative;
+  display: inline-flex; flex-direction: column; gap: 6px; align-items: center;
+  padding: 18px 40px;
+  border-radius: 16px;
+  background: rgba(10,14,39,0.6);
+  border: 1px solid rgba(168,85,247,0.3);
+  backdrop-filter: blur(8px);
+}
+.signoff-label { font-size: 0.85rem; color: #8891b5; letter-spacing: 1px; }
+.signoff-name {
+  font-size: 2.2rem; font-weight: 900; letter-spacing: 4px;
+  background: linear-gradient(90deg, #00e5ff, #a855f7);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  text-shadow: 0 0 30px rgba(0,229,255,0.4);
+}
+@media (max-width: 480px) {
+  .signoff { padding: 32px 20px; }
+  .signoff h3 { font-size: 1.4rem; }
+  .signoff-name { font-size: 1.7rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
+
+<div class="progress-bar" id="progressBar"></div>
+<button class="menu-toggle" id="menuToggle" aria-label="باز کردن منو">☰</button>
+<div class="overlay" id="overlay"></div>
+
+<div class="layout">
+  <!-- ════════ ناوبری ════════ -->
+  <nav class="sidebar" id="sidebar" aria-label="ناوبری اصلی">
+    <div class="sidebar-top">
+      <div class="sidebar-brand">
+        <span class="logo">⚡</span>
+        <span>
+          <span class="brand-text">دایره‌المعارف HTML</span>
+          <span class="brand-sub">تمام تگ‌ها — ۰ تا ۱۰۰ — by nausea</span>
+        </span>
+      </div>
+      <div class="search-box">
+        <span class="s-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="جستجوی تگ یا موضوع..." aria-label="جستجو">
+      </div>
+      <div class="search-count" id="searchCount"></div>
+    </div>
+
+    <div class="nav-scroll" id="navScroll">
+      <div class="nav-section-title">🚀 شروع</div>
+      <a href="#intro" class="nav-link"><span class="nav-num">۰</span> مقدمه و راهنما</a>
+      <a href="#anatomy" class="nav-link"><span class="nav-num">۱</span> آناتومی تگ‌ها</a>
+
+      <div class="nav-section-title">📄 ساختار سند</div>
+      <a href="#ch-structure" class="nav-link"><span class="nav-num">۲</span> تگ‌های ساختاری</a>
+      <a href="#ch-meta" class="nav-link"><span class="nav-num">۳</span> متادیتا و head</a>
+
+      <div class="nav-section-title">✍️ محتوای متنی</div>
+      <a href="#ch-sections" class="nav-link"><span class="nav-num">۴</span> بخش‌بندی معنایی</a>
+      <a href="#ch-text" class="nav-link"><span class="nav-num">۵</span> گروه‌بندی متن</a>
+      <a href="#ch-inline" class="nav-link"><span class="nav-num">۶</span> متن درون‌خطی</a>
+
+      <div class="nav-section-title">🔗 لینک و رسانه</div>
+      <a href="#ch-links" class="nav-link"><span class="nav-num">۷</span> لینک‌ها</a>
+      <a href="#ch-media" class="nav-link"><span class="nav-num">۸</span> تصاویر و رسانه</a>
+      <a href="#ch-embed" class="nav-link"><span class="nav-num">۹</span> محتوای تعبیه‌شده</a>
+
+      <div class="nav-section-title">📊 داده و فرم</div>
+      <a href="#ch-lists" class="nav-link"><span class="nav-num">۱۰</span> لیست‌ها</a>
+      <a href="#ch-tables" class="nav-link"><span class="nav-num">۱۱</span> جدول‌ها</a>
+      <a href="#ch-forms" class="nav-link"><span class="nav-num">۱۲</span> فرم‌ها</a>
+      <a href="#ch-interactive" class="nav-link"><span class="nav-num">۱۳</span> عناصر تعاملی</a>
+
+      <div class="nav-section-title">🎨 گرافیک و اسکریپت</div>
+      <a href="#ch-scripting" class="nav-link"><span class="nav-num">۱۴</span> اسکریپت و canvas</a>
+      <a href="#ch-svg" class="nav-link"><span class="nav-num">۱۵</span> SVG و MathML</a>
+
+      <div class="nav-section-title">⚙️ صفت‌ها</div>
+      <a href="#ch-global" class="nav-link"><span class="nav-num">۱۶</span> صفت‌های سراسری</a>
+      <a href="#ch-events" class="nav-link"><span class="nav-num">۱۷</span> صفت‌های رویداد</a>
+      <a href="#ch-entities" class="nav-link"><span class="nav-num">۱۸</span> موجودیت‌ها</a>
+
+      <div class="nav-section-title">⚰️ تگ‌های مرده</div>
+      <a href="#ch-deprecated" class="nav-link"><span class="nav-num">💀</span> منقضی‌شده</a>
+      <a href="#ch-obsolete" class="nav-link"><span class="nav-num">🪦</span> حذف‌شده کامل</a>
+
+      <div class="nav-section-title">🔮 آینده تو</div>
+      <a href="#f-css" class="nav-link"><span class="nav-num">🎨</span> CSS</a>
+      <a href="#f-js" class="nav-link"><span class="nav-num">⚡</span> JavaScript</a>
+      <a href="#f-back" class="nav-link"><span class="nav-num">🔧</span> Backend</a>
+      <a href="#f-full" class="nav-link"><span class="nav-num">🌐</span> Full-Stack</a>
+    </div>
+  </nav>
+
+  <!-- ════════ محتوا ════════ -->
+  <main class="main">
+    <header class="hero" id="top">
+      <span class="hero-badge">⚡ نسخه دایره‌المعارفی — کامل و آفلاین</span>
+      <h1>تمام <span class="gradient-text">تگ‌های HTML</span><br>از <span class="gradient-text">صفر</span> تا <span class="gradient-text">صد</span></h1>
+      <p>مرجع جامع فارسی — هر تگی که در تاریخ HTML وجود داشته: معروف، نادر، منقضی‌شده و حذف‌شده. هر کدام با تمام صفت‌ها، مثال و توضیح کامل.</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">۱۵۰+</div><div class="stat-label">تگ پوشش‌داده‌شده</div></div>
+        <div class="stat"><div class="stat-num">۲۴</div><div class="stat-label">فصل کامل</div></div>
+        <div class="stat"><div class="stat-num">۱۰۰٪</div><div class="stat-label">آفلاین</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-label">مثال عملی</div></div>
+      </div>
+      <p class="signed-by">نوشته‌شده توسط <b>nausea</b></p>
+    </header>
+
+    <!-- ════════ فصل ۰: مقدمه ════════ -->
+    <section class="chapter" id="intro">
+      <div class="chapter-header">
+        <span class="chapter-badge">۰</span>
+        <div>
+          <h2>مقدمه و راهنمای استفاده</h2>
+          <span class="sub">چطور از این دایره‌المعارف بیشترین بهره را ببری</span>
+        </div>
+      </div>
+
+      <p>به کامل‌ترین مرجع HTML فارسی خوش آمدی! 👋 این سند یک کتاب آموزشی ساده نیست؛ یک <b>دایره‌المعارف</b> است که سعی کرده <b>تمام</b> تگ‌های HTML را پوشش دهد — از پرکاربردترین‌ها تا تگ‌هایی که دهه‌هاست منقضی شده‌اند و دیگر هیچ مرورگری ازشان پشتیبانی نمی‌کند.</p>
+
+      <h3>راهنمای برچسب‌ها (Pills)</h3>
+      <p>کنار نام هر تگ، یک یا چند «برچسب رنگی» می‌بینی که نوع آن را مشخص می‌کند:</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin:16px 0;">
+        <span class="tag-pill pill-block">Block — بلوکی</span>
+        <span class="tag-pill pill-inline">Inline — درون‌خطی</span>
+        <span class="tag-pill pill-empty">Empty — خالی (بدون تگ بسته)</span>
+        <span class="tag-pill pill-meta">Metadata — متادیتا</span>
+        <span class="tag-pill pill-dep">Deprecated — منقضی</span>
+        <span class="tag-pill pill-obs">Obsolete — حذف‌شده</span>
+      </div>
+      <ul>
+        <li><b>Block (بلوکی):</b> کل عرض خط را می‌گیرد و خط جدید ایجاد می‌کند (مثل پاراگراف).</li>
+        <li><b>Inline (درون‌خطی):</b> فقط به اندازه محتوایش جا می‌گیرد و وسط متن می‌نشیند.</li>
+        <li><b>Empty (خالی/Void):</b> محتوا ندارد، پس تگ بسته هم ندارد (مثل تصویر).</li>
+        <li><b>Metadata:</b> در بخش <span class="kw">&lt;head&gt;</span> قرار می‌گیرد و دیده نمی‌شود.</li>
+        <li><b>Deprecated (منقضی):</b> هنوز شاید کار کند اما استفاده‌اش <b>ممنوع</b> است — جایگزین مدرن دارد.</li>
+        <li><b>Obsolete (حذف‌شده):</b> کاملاً از استاندارد حذف شده و مرورگرهای مدرن نادیده‌اش می‌گیرند.</li>
+      </ul>
+
+      <div class="box box-tip">
+        <div class="box-title">🔍 از جستجو استفاده کن!</div>
+        <p>بالای منوی کناری یک جعبه جستجو هست. هر تگی را که دنبالش هستی تایپ کن (مثلاً <span class="kw">canvas</span> یا «فرم») تا فوراً فصل مربوطه فیلتر شود.</p>
+      </div>
+
+      <div class="box box-note">
+        <div class="box-title">📌 درباره استانداردها</div>
+        <p>این مرجع بر اساس <b>HTML Living Standard</b> (استاندارد زنده WHATWG) که نسخه فعلی و رسمی HTML است نوشته شده. هر جا تگی قدیمی باشد، صریحاً مشخص شده.</p>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱: آناتومی ════════ -->
+    <section class="chapter" id="anatomy">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱</span>
+        <div>
+          <h2>آناتومی کامل تگ‌ها و صفت‌ها</h2>
+          <span class="sub">درک عمیق از واحدهای سازنده HTML</span>
+        </div>
+      </div>
+
+      <p>قبل از غرق شدن در تگ‌ها، بیا با دقت کالبدشکافی کنیم که یک «عنصر» (Element) دقیقاً از چه چیزهایی ساخته شده. این پایه‌ی فهم همه چیز است.</p>
+
+      <h3>عنصر، تگ و محتوا</h3>
+      <div class="code-block">
+        <div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">آناتومی یک عنصر</span></div>
+<pre><code>   <span class="cmt">┌─── تگ باز (Opening Tag)</span>
+   <span class="cmt">│        ┌─── محتوا (Content)</span>
+   <span class="cmt">│        │       ┌─── تگ بسته (Closing Tag)</span>
+   <span class="cmt">▼        ▼       ▼</span>
+<span class="tag">&lt;p&gt;</span><span class="txt">سلام دنیا</span><span class="tag">&lt;/p&gt;</span>
+<span class="cmt">└──────────────────┘</span>
+<span class="cmt">  کل این = یک «عنصر» (Element)</span></code></pre>
+      </div>
+
+      <h3>کالبدشکافی یک صفت (Attribute)</h3>
+      <div class="code-block">
+        <div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">آناتومی صفت</span></div>
+<pre><code><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"page.html"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>
+    <span class="cmt">▲       ▲              ▲</span>
+    <span class="cmt">│       │              └── صفت دوم</span>
+    <span class="cmt">│       └── مقدار (Value) داخل گیومه</span>
+    <span class="cmt">└── نام صفت (Name)</span></code></pre>
+      </div>
+      <ul>
+        <li>صفت‌ها <b>فقط در تگ باز</b> می‌آیند.</li>
+        <li>با فاصله از نام تگ و از همدیگر جدا می‌شوند.</li>
+        <li>مقدار را معمولاً داخل گیومه دوتایی <span class="kw">" "</span> می‌گذاریم (توصیه می‌شود).</li>
+        <li>ترتیب صفت‌ها مهم نیست.</li>
+      </ul>
+
+      <h3>صفت‌های بولی (Boolean Attributes)</h3>
+      <p>بعضی صفت‌ها فقط «وجود» یا «عدم وجود»‌شان مهم است و مقدار نمی‌خواهند:</p>
+      <div class="code-block">
+        <div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">صفت بولی</span></div>
+<pre><code><span class="cmt">&lt;!-- این‌ها همگی معتبر و معادل هستند: --&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">disabled</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">disabled</span>=<span class="val">""</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">disabled</span>=<span class="val">"disabled"</span><span class="tag">&gt;</span>
+
+<span class="cmt">&lt;!-- صرفِ نوشتن نام صفت = فعال بودن آن --&gt;</span>
+<span class="tag">&lt;video</span> <span class="attr">autoplay</span> <span class="attr">muted</span> <span class="attr">loop</span> <span class="attr">controls</span><span class="tag">&gt;</span></code></pre>
+      </div>
+      <p>نمونه‌های صفت بولی: <span class="kw">disabled</span>، <span class="kw">checked</span>، <span class="kw">required</span>، <span class="kw">readonly</span>، <span class="kw">selected</span>، <span class="kw">multiple</span>، <span class="kw">autofocus</span>، <span class="kw">hidden</span>، <span class="kw">async</span>، <span class="kw">defer</span>.</p>
+
+      <h3>انواع گروه‌بندی محتوا (Content Categories)</h3>
+      <p>HTML تگ‌ها را در دسته‌های منطقی گروه‌بندی می‌کند. این مفهوم پیشرفته اما مهم است:</p>
+      <table class="ref-table">
+        <tr><th>دسته</th><th>توضیح</th></tr>
+        <tr><td>Flow</td><td>اکثر عناصری که در body می‌آیند</td></tr>
+        <tr><td>Phrasing</td><td>متن و عناصر درون‌خطی</td></tr>
+        <tr><td>Heading</td><td>عناوین (h1 تا h6)</td></tr>
+        <tr><td>Sectioning</td><td>بخش‌بندی (article, section, nav, aside)</td></tr>
+        <tr><td>Embedded</td><td>محتوای خارجی (img, video, iframe)</td></tr>
+        <tr><td>Interactive</td><td>عناصر تعاملی (a, button, input)</td></tr>
+        <tr><td>Metadata</td><td>عناصر head (meta, link, title)</td></tr>
+      </table>
+
+      <h3>کامنت‌ها</h3>
+      <div class="code-block">
+        <div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">کامنت</span></div>
+<pre><code><span class="cmt">&lt;!-- این یک کامنت تک‌خطی است --&gt;</span>
+
+<span class="cmt">&lt;!--
+  کامنت
+  چندخطی
+--&gt;</span>
+
+<span class="cmt">&lt;!-- کامنت‌ها در منبع صفحه دیده می‌شوند پس
+     اطلاعات حساس را داخلشان نگذار! --&gt;</span></code></pre>
+      </div>
+
+      <div class="box box-warn">
+        <div class="box-title">⚠️ تگ‌های خود-بسته (Self-closing)</div>
+        <p>در HTML5، نوشتن اسلش پایانی در تگ‌های خالی <b>اختیاری</b> است: هم <span class="kw">&lt;br&gt;</span> و هم <span class="kw">&lt;br /&gt;</span> درست‌اند. اما در XHTML (یا داخل SVG) اسلش <b>اجباری</b> است. قرارداد مدرن: در HTML خالص اسلش را حذف کن.</p>
+      </div>
+    </section>
+    <!-- ════════ فصل ۲: ساختاری ════════ -->
+    <section class="chapter" id="ch-structure">
+      <div class="chapter-header">
+        <span class="chapter-badge">۲</span>
+        <div>
+          <h2>تگ‌های ساختاری ریشه</h2>
+          <span class="sub">اسکلت اصلی که هر سند باید داشته باشد</span>
+        </div>
+      </div>
+
+      <p>این تگ‌ها چارچوب کلی هر صفحه HTML را می‌سازند. بدون این‌ها هیچ سند معتبری وجود ندارد.</p>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;!DOCTYPE html&gt;</span>
+          <span class="tag-pill pill-meta">اعلان</span>
+          <span class="tag-desc-head">اعلان نوع سند — به مرورگر می‌گوید این HTML5 است</span>
+        </div>
+        <div class="tag-card-body">
+          <p>اولین خط هر سند. این یک تگ معمولی نیست، بلکه یک «اعلان» است. وظیفه‌اش این است که مرورگر را در «حالت استاندارد» (Standards Mode) قرار دهد، نه «حالت عجیب» (Quirks Mode) که رفتار قدیمی و غیرقابل‌پیش‌بینی دارد.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">DOCTYPE</span></div>
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>  <span class="cmt">&lt;!-- HTML5 — ساده و مدرن --&gt;</span>
+
+<span class="cmt">&lt;!-- در گذشته (HTML4) اینطوری بود: --&gt;</span>
+<span class="cmt">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" ...&gt;</span></code></pre></div>
+          <div class="box box-warn"><div class="box-title">⚠️ اگر فراموشش کنی</div><p>بدون DOCTYPE، مرورگر وارد Quirks Mode می‌شود و طراحی صفحه‌ات به‌هم می‌ریزد. <b>همیشه</b> در خط اول بنویسش.</p></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;html&gt;</span>
+          <span class="tag-pill pill-block">ریشه</span>
+          <span class="tag-desc-head">عنصر ریشه (root) که همه چیز داخلش قرار می‌گیرد</span>
+        </div>
+        <div class="tag-card-body">
+          <p>تنها فرزندان مستقیم مجازش <span class="kw">&lt;head&gt;</span> و <span class="kw">&lt;body&gt;</span> هستند.</p>
+          <h4>صفت‌های مهم:</h4>
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>lang</td><td>زبان سند (fa, en, ar...) — برای SEO و صفحه‌خوان حیاتی</td></tr>
+            <tr><td>dir</td><td>جهت متن: rtl (راست‌به‌چپ) یا ltr (چپ‌به‌راست) یا auto</td></tr>
+            <tr><td>xmlns</td><td>فضای‌نام XML (فقط در XHTML لازم است)</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">html</span></div>
+<pre><code><span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"fa"</span> <span class="attr">dir</span>=<span class="val">"rtl"</span><span class="tag">&gt;</span>
+  ...
+<span class="tag">&lt;/html&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;head&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-desc-head">ظرف اطلاعات نامرئی سند</span>
+        </div>
+        <div class="tag-card-body">
+          <p>هر چیزی که در صفحه دیده نمی‌شود اما برای مرورگر، موتورهای جستجو و شبکه‌های اجتماعی مهم است، اینجا قرار می‌گیرد: عنوان، متاها، لینک CSS، اسکریپت‌ها و... . (تمام تگ‌های مجاز در head را در فصل ۳ کامل می‌بینی.)</p>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;body&gt;</span>
+          <span class="tag-pill pill-block">بدنه</span>
+          <span class="tag-desc-head">تمام محتوای قابل مشاهده صفحه</span>
+        </div>
+        <div class="tag-card-body">
+          <p>هر چیزی که کاربر می‌بیند اینجاست. در هر سند فقط <b>یک</b> body مجاز است.</p>
+          <h4>صفت‌های رویداد معروف body:</h4>
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>onload</td><td>وقتی کل صفحه بارگذاری شد اجرا می‌شود</td></tr>
+            <tr><td>onunload</td><td>هنگام ترک صفحه</td></tr>
+            <tr><td>onresize</td><td>هنگام تغییر اندازه پنجره</td></tr>
+          </table>
+          <div class="box box-danger"><div class="box-title">💀 صفت‌های مرده body</div><p>صفت‌هایی مثل <span class="kw">bgcolor</span>، <span class="kw">text</span>، <span class="kw">link</span>، <span class="kw">background</span> روی body <b>منقضی شده‌اند</b>. این کارها حالا با CSS انجام می‌شوند. (در فصل تگ‌های مرده بیشتر می‌بینی.)</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۳: متادیتا ════════ -->
+    <section class="chapter" id="ch-meta">
+      <div class="chapter-header">
+        <span class="chapter-badge">۳</span>
+        <div>
+          <h2>متادیتا و عناصر &lt;head&gt;</h2>
+          <span class="sub">اطلاعات پشت‌صحنه‌ای که سرنوشت سایتت را تعیین می‌کنند</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;title&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-desc-head">عنوان صفحه که در تب مرورگر و نتایج گوگل نمایش داده می‌شود</span>
+        </div>
+        <div class="tag-card-body">
+          <p>مهم‌ترین عنصر برای SEO! در هر سند فقط یکی مجاز است. متن خالص می‌پذیرد (تگ داخلش کار نمی‌کند).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">title</span></div>
+<pre><code><span class="tag">&lt;title&gt;</span><span class="txt">فروشگاه کفش | بهترین قیمت‌ها</span><span class="tag">&lt;/title&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;meta&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-pill pill-empty">خالی</span>
+          <span class="tag-desc-head">حامل انواع اطلاعات متادیتای صفحه</span>
+        </div>
+        <div class="tag-card-body">
+          <p>یکی از پرکاربردترین و چندمنظوره‌ترین تگ‌ها. با تغییر صفت‌هایش، اطلاعات مختلفی ارائه می‌دهد:</p>
+          <h4>۱. کدگذاری حروف (حیاتی برای فارسی):</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">charset</span></div>
+<pre><code><span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span></code></pre></div>
+          <h4>۲. Viewport (ریسپانسیو در موبایل):</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">viewport</span></div>
+<pre><code><span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span></code></pre></div>
+          <h4>۳. توضیحات، کلمات کلیدی، نویسنده (SEO):</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">SEO meta</span></div>
+<pre><code><span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"description"</span> <span class="attr">content</span>=<span class="val">"توضیح صفحه"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"keywords"</span> <span class="attr">content</span>=<span class="val">"کلمه۱, کلمه۲"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"author"</span> <span class="attr">content</span>=<span class="val">"nausea"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"robots"</span> <span class="attr">content</span>=<span class="val">"index, follow"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"theme-color"</span> <span class="attr">content</span>=<span class="val">"#0a0e1a"</span><span class="tag">&gt;</span></code></pre></div>
+          <h4>۴. رفرش خودکار و ریدایرکت (http-equiv):</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">http-equiv</span></div>
+<pre><code><span class="cmt">&lt;!-- هر ۳۰ ثانیه صفحه رفرش می‌شود --&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">http-equiv</span>=<span class="val">"refresh"</span> <span class="attr">content</span>=<span class="val">"30"</span><span class="tag">&gt;</span>
+
+<span class="cmt">&lt;!-- بعد از ۵ ثانیه به صفحه دیگر برو --&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">http-equiv</span>=<span class="val">"refresh"</span> <span class="attr">content</span>=<span class="val">"5; url=new.html"</span><span class="tag">&gt;</span></code></pre></div>
+          <h4>۵. متاهای شبکه اجتماعی (Open Graph & Twitter):</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">Open Graph</span></div>
+<pre><code><span class="tag">&lt;meta</span> <span class="attr">property</span>=<span class="val">"og:title"</span> <span class="attr">content</span>=<span class="val">"عنوان"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">property</span>=<span class="val">"og:image"</span> <span class="attr">content</span>=<span class="val">"preview.jpg"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"twitter:card"</span> <span class="attr">content</span>=<span class="val">"summary_large_image"</span><span class="tag">&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;link&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-pill pill-empty">خالی</span>
+          <span class="tag-desc-head">اتصال منابع خارجی (CSS، فاوآیکون، فونت)</span>
+        </div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>rel</td><td>نوع رابطه: stylesheet, icon, preload, preconnect, alternate, canonical</td></tr>
+            <tr><td>href</td><td>آدرس منبع</td></tr>
+            <tr><td>type</td><td>نوع MIME فایل</td></tr>
+            <tr><td>media</td><td>شرط رسانه‌ای (مثلاً فقط برای چاپ)</td></tr>
+            <tr><td>sizes</td><td>اندازه آیکون</td></tr>
+            <tr><td>crossorigin</td><td>تنظیمات CORS</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">link</span></div>
+<pre><code><span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"icon"</span> <span class="attr">href</span>=<span class="val">"favicon.ico"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"preconnect"</span> <span class="attr">href</span>=<span class="val">"https://fonts.gstatic.com"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"canonical"</span> <span class="attr">href</span>=<span class="val">"https://site.com/page"</span><span class="tag">&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;style&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-desc-head">نوشتن کد CSS مستقیماً داخل سند</span>
+        </div>
+        <div class="tag-card-body">
+          <p>برای استایل‌های داخلی صفحه. صفت <span class="kw">media</span> می‌گیرد تا فقط در شرایط خاص اعمال شود.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">style</span></div>
+<pre><code><span class="tag">&lt;style&gt;</span>
+  <span class="attr">body</span> { <span class="attr">background</span>: <span class="val">black</span>; }
+<span class="tag">&lt;/style&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;base&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-pill pill-empty">خالی</span>
+          <span class="tag-desc-head">تعیین آدرس پایه و هدف پیش‌فرض برای همه لینک‌ها</span>
+        </div>
+        <div class="tag-card-body">
+          <p>در هر سند فقط یکی مجاز است و باید قبل از سایر تگ‌هایی که از URL استفاده می‌کنند بیاید.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">base</span></div>
+<pre><code><span class="tag">&lt;base</span> <span class="attr">href</span>=<span class="val">"https://example.com/"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>
+<span class="cmt">&lt;!-- حالا href="about" یعنی https://example.com/about --&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head">
+          <span class="tag-name">&lt;noscript&gt;</span>
+          <span class="tag-pill pill-meta">متادیتا</span>
+          <span class="tag-desc-head">محتوای جایگزین وقتی JavaScript غیرفعال است</span>
+        </div>
+        <div class="tag-card-body">
+          <p>اگر مرورگر کاربر JavaScript را خاموش کرده باشد، محتوای داخل این تگ نمایش داده می‌شود.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">noscript</span></div>
+<pre><code><span class="tag">&lt;noscript&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">لطفاً JavaScript را فعال کنید!</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/noscript&gt;</span></code></pre></div>
+        </div>
+      </div>
+    </section>
+    <!-- ════════ فصل ۴: بخش‌بندی معنایی ════════ -->
+    <section class="chapter" id="ch-sections">
+      <div class="chapter-header">
+        <span class="chapter-badge">۴</span>
+        <div>
+          <h2>بخش‌بندی و عناوین معنایی</h2>
+          <span class="sub">تگ‌هایی که به ساختار صفحه معنا می‌دهند</span>
+        </div>
+      </div>
+
+      <p>این تگ‌ها به مرورگر، گوگل و صفحه‌خوان‌ها می‌گویند هر بخش از صفحه چه نقشی دارد. استفاده درست از آن‌ها نشانه یک توسعه‌دهنده حرفه‌ای است.</p>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;header&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">سربرگ صفحه یا یک بخش (لوگو، عنوان، منو)</span></div>
+        <div class="tag-card-body"><p>می‌تواند چندبار در صفحه استفاده شود (هر article می‌تواند header خودش را داشته باشد). نباید داخل footer یا header دیگری قرار گیرد.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;nav&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">بخش ناوبری اصلی (مجموعه لینک‌های مهم)</span></div>
+        <div class="tag-card-body"><p>فقط برای ناوبری‌های <b>اصلی</b> استفاده کن، نه هر گروه لینکی. صفحه‌خوان‌ها به کاربر اجازه می‌دهند سریع به nav بپرند.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;main&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">محتوای اصلی و یکتای صفحه</span></div>
+        <div class="tag-card-body"><p>در هر صفحه فقط <b>یک</b> main باید قابل مشاهده باشد و نباید داخل article, aside, header, footer یا nav قرار گیرد.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;footer&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">پاورقی صفحه یا بخش (کپی‌رایت، لینک‌ها)</span></div>
+        <div class="tag-card-body"><p>مثل header می‌تواند چندبار استفاده شود (پاورقی کل صفحه و پاورقی هر مقاله).</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;article&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">محتوای مستقل و خودکفا (پست، خبر، نظر)</span></div>
+        <div class="tag-card-body"><p>تست: اگر بتوان آن را جدا کرد و جای دیگری منتشر کرد و باز هم معنادار باشد، باید article باشد (مثل یک پست وبلاگ یا یک کامنت).</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;section&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">یک بخش موضوعی مستقل از محتوا</span></div>
+        <div class="tag-card-body"><p>معمولاً با یک عنوان (h1-h6) همراه است. اگر فقط برای استایل‌دهی می‌خواهی گروه‌بندی کنی، از div استفاده کن نه section.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;aside&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">محتوای جانبی و مرتبط (نوار کناری، تبلیغ، نکته)</span></div>
+        <div class="tag-card-body"><p>محتوایی که به‌طور غیرمستقیم با محتوای اصلی مرتبط است.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;h1&gt; ... &lt;h6&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">شش سطح عنوان، از مهم‌ترین (h1) تا کم‌اهمیت‌ترین (h6)</span></div>
+        <div class="tag-card-body">
+          <p>ساختار سلسله‌مراتبی صفحه را می‌سازند. به ترتیب استفاده کن و از پرش نکن.</p>
+          <div class="box box-warn"><div class="box-title">⚠️ قانون h1</div><p>در هر صفحه فقط یک h1 (عنوان اصلی). بعد از h1 به h2 برو، نه h3. این برای SEO و دسترسی‌پذیری حیاتی است.</p></div>
+        </div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;hgroup&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">گروه‌بندی یک عنوان اصلی با عنوان فرعی</span></div>
+        <div class="tag-card-body"><p>برای ترکیب یک عنوان (h1-h6) با یک پاراگراف توضیحی فرعی.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">hgroup</span></div>
+<pre><code><span class="tag">&lt;hgroup&gt;</span>
+  <span class="tag">&lt;h1&gt;</span><span class="txt">عنوان اصلی</span><span class="tag">&lt;/h1&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">شعار یا زیرعنوان</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/hgroup&gt;</span></code></pre></div>
+        </div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;address&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">اطلاعات تماس نویسنده یا صاحب صفحه</span></div>
+        <div class="tag-card-body"><p>معمولاً داخل footer قرار می‌گیرد. به‌طور پیش‌فرض ایتالیک نمایش داده می‌شود.</p></div>
+      </div>
+
+      <div class="live-demo"><span class="live-label">🖥️ ساختار معنایی نمونه</span>
+        <div style="color:#1a1a1a;border:1px solid #ccc;border-radius:6px;overflow:hidden;font-size:0.85rem;">
+          <div style="background:#e0e7ff;padding:8px;text-align:center;">&lt;header&gt; سربرگ + لوگو</div>
+          <div style="background:#dcfce7;padding:6px;text-align:center;">&lt;nav&gt; منو</div>
+          <div style="display:flex;">
+            <div style="flex:3;background:#fef3c7;padding:16px;text-align:center;">&lt;main&gt; → &lt;article&gt;</div>
+            <div style="flex:1;background:#fce7f3;padding:16px;text-align:center;">&lt;aside&gt;</div>
+          </div>
+          <div style="background:#e0e7ff;padding:8px;text-align:center;">&lt;footer&gt; پاورقی</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۵: گروه‌بندی متن ════════ -->
+    <section class="chapter" id="ch-text">
+      <div class="chapter-header">
+        <span class="chapter-badge">۵</span>
+        <div>
+          <h2>گروه‌بندی محتوای متنی</h2>
+          <span class="sub">پاراگراف، نقل‌قول، کد، شکل و جعبه‌های بلوکی</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;p&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">پاراگراف متنی</span></div>
+        <div class="tag-card-body"><p>پایه‌ای‌ترین واحد متن. نمی‌توان داخلش عنصر بلوکی (مثل div یا p دیگر) گذاشت.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;hr&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">جداکننده موضوعی (خط افقی)</span></div>
+        <div class="tag-card-body"><p>از نظر معنایی نشان‌دهنده «تغییر موضوع» است، نه فقط یک خط تزئینی. به‌طور پیش‌فرض یک خط افقی رسم می‌کند.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;pre&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">متن از پیش‌قالب‌بندی‌شده (حفظ فاصله و خطوط)</span></div>
+        <div class="tag-card-body"><p>برخلاف سایر تگ‌ها، تمام فاصله‌ها، تب‌ها و خطوط جدید را <b>دقیقاً</b> حفظ می‌کند. با فونت monospace نمایش داده می‌شود. اغلب همراه با <span class="kw">&lt;code&gt;</span> برای نمایش کد استفاده می‌شود.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;blockquote&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">نقل‌قول بلند و بلوکی</span></div>
+        <div class="tag-card-body"><p>صفت <span class="kw">cite</span> می‌گیرد که آدرس منبع نقل‌قول را مشخص می‌کند (نمایش داده نمی‌شود ولی معنادار است).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">blockquote</span></div>
+<pre><code><span class="tag">&lt;blockquote</span> <span class="attr">cite</span>=<span class="val">"https://source.com"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">به آینده باور داشته باش.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/blockquote&gt;</span></code></pre></div>
+        </div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;ol&gt; &lt;ul&gt; &lt;li&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست‌ها (در فصل ۱۰ کامل توضیح داده شده)</span></div>
+        <div class="tag-card-body"><p>این تگ‌ها در فصل اختصاصی «لیست‌ها» با تمام جزئیات بررسی می‌شوند.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست توضیحی (اصطلاح ← تعریف)</span></div>
+        <div class="tag-card-body"><p><span class="kw">dl</span> ظرف، <span class="kw">dt</span> اصطلاح (term) و <span class="kw">dd</span> توضیح (description) است. یک dt می‌تواند چند dd داشته باشد.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;figure&gt; &lt;figcaption&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">محتوای مستقل (تصویر/کد/نمودار) با زیرنویس</span></div>
+        <div class="tag-card-body"><p><span class="kw">figcaption</span> زیرنویس را مشخص می‌کند و باید اولین یا آخرین فرزند figure باشد.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">figure</span></div>
+<pre><code><span class="tag">&lt;figure&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"chart.png"</span> <span class="attr">alt</span>=<span class="val">"نمودار"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;figcaption&gt;</span><span class="txt">شکل ۱: رشد فروش</span><span class="tag">&lt;/figcaption&gt;</span>
+<span class="tag">&lt;/figure&gt;</span></code></pre></div>
+        </div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;div&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">ظرف بلوکی عمومی و بی‌معنا</span></div>
+        <div class="tag-card-body"><p>پرکاربردترین تگ برای گروه‌بندی و استایل‌دهی. هیچ معنای معنایی ندارد. <b>فقط</b> وقتی استفاده کن که هیچ تگ معنایی مناسبی وجود نداشته باشد.</p></div>
+      </div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;menu&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست دستورات/گزینه‌ها (معادل معنایی ul برای ابزارها)</span></div>
+        <div class="tag-card-body"><p>در HTML امروزی، رفتارش دقیقاً مثل <span class="kw">ul</span> است اما معنای «نوار ابزار/دستورات» دارد.</p></div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۶: متن درون‌خطی ════════ -->
+    <section class="chapter" id="ch-inline">
+      <div class="chapter-header">
+        <span class="chapter-badge">۶</span>
+        <div>
+          <h2>معناشناسی متن درون‌خطی</h2>
+          <span class="sub">دایره‌المعارف کامل تگ‌های inline — همه را پوشش می‌دهیم</span>
+        </div>
+      </div>
+
+      <p>اینجا <b>تمام</b> تگ‌های درون‌خطی (inline / phrasing) را با معنای دقیقشان می‌بینی. خیلی‌هایشان ظاهر مشابه دارند اما معنای متفاوت — و معنا همان چیزی است که تو را حرفه‌ای می‌کند.</p>
+
+      <table class="ref-table">
+        <tr><th>تگ</th><th>نمایش پیش‌فرض</th><th>معنا و کاربرد</th></tr>
+        <tr><td>&lt;a&gt;</td><td>لینک آبی زیرخط‌دار</td><td>پیوند (در فصل ۷ کامل)</td></tr>
+        <tr><td>&lt;strong&gt;</td><td>پررنگ</td><td>اهمیت بالا (معنایی)</td></tr>
+        <tr><td>&lt;b&gt;</td><td>پررنگ</td><td>جلب توجه بصری بدون اهمیت معنایی</td></tr>
+        <tr><td>&lt;em&gt;</td><td>کج</td><td>تأکید (معنایی) — لحن صدا را تغییر می‌دهد</td></tr>
+        <tr><td>&lt;i&gt;</td><td>کج</td><td>متن متفاوت: اصطلاح فنی، نام خارجی، فکر</td></tr>
+        <tr><td>&lt;mark&gt;</td><td>هایلایت زرد</td><td>متن نشانه‌گذاری/مرتبط با جستجو</td></tr>
+        <tr><td>&lt;small&gt;</td><td>کوچک‌تر</td><td>متن جانبی (کپی‌رایت، شرایط)</td></tr>
+        <tr><td>&lt;del&gt;</td><td>خط‌خورده</td><td>متن حذف‌شده (صفت cite و datetime می‌گیرد)</td></tr>
+        <tr><td>&lt;ins&gt;</td><td>زیرخط‌دار</td><td>متن اضافه‌شده</td></tr>
+        <tr><td>&lt;s&gt;</td><td>خط‌خورده</td><td>متنی که دیگر دقیق/معتبر نیست</td></tr>
+        <tr><td>&lt;u&gt;</td><td>زیرخط‌دار</td><td>متن با حاشیه‌نویسی غیرمتنی (مثل غلط املایی)</td></tr>
+        <tr><td>&lt;sub&gt;</td><td>زیرنویس کوچک</td><td>اندیس پایین (H₂O)</td></tr>
+        <tr><td>&lt;sup&gt;</td><td>بالانویس کوچک</td><td>توان/اندیس بالا (x²)</td></tr>
+        <tr><td>&lt;code&gt;</td><td>فونت مونو</td><td>قطعه کد یا نام دستور</td></tr>
+        <tr><td>&lt;kbd&gt;</td><td>فونت مونو</td><td>ورودی کیبورد (Ctrl+C)</td></tr>
+        <tr><td>&lt;samp&gt;</td><td>فونت مونو</td><td>خروجی نمونه یک برنامه</td></tr>
+        <tr><td>&lt;var&gt;</td><td>کج</td><td>متغیر ریاضی/برنامه‌نویسی</td></tr>
+        <tr><td>&lt;q&gt;</td><td>با گیومه خودکار</td><td>نقل‌قول کوتاه درون‌خطی</td></tr>
+        <tr><td>&lt;cite&gt;</td><td>کج</td><td>عنوان یک اثر (کتاب، فیلم، آهنگ)</td></tr>
+        <tr><td>&lt;abbr&gt;</td><td>زیرخط نقطه‌چین</td><td>مخفف (با صفت title برای توضیح کامل)</td></tr>
+        <tr><td>&lt;dfn&gt;</td><td>کج</td><td>اولین تعریف یک اصطلاح</td></tr>
+        <tr><td>&lt;time&gt;</td><td>معمولی</td><td>تاریخ/زمان ماشین‌خوان (صفت datetime)</td></tr>
+        <tr><td>&lt;data&gt;</td><td>معمولی</td><td>اتصال محتوا به مقدار ماشین‌خوان (صفت value)</td></tr>
+        <tr><td>&lt;span&gt;</td><td>معمولی</td><td>ظرف درون‌خطی بی‌معنا (برای استایل/اسکریپت)</td></tr>
+        <tr><td>&lt;br&gt;</td><td>شکست خط</td><td>شکستن خط (در شعر/آدرس) — Empty</td></tr>
+        <tr><td>&lt;wbr&gt;</td><td>—</td><td>نقطه پیشنهادی شکستن کلمه طولانی — Empty</td></tr>
+        <tr><td>&lt;bdi&gt;</td><td>معمولی</td><td>جداسازی جهت متن (عالی برای فارسی+انگلیسی)</td></tr>
+        <tr><td>&lt;bdo&gt;</td><td>معمولی</td><td>وارونه کردن اجباری جهت متن (صفت dir)</td></tr>
+        <tr><td>&lt;ruby&gt;</td><td>ویژه</td><td>حاشیه‌نویسی تلفظ (زبان‌های شرق آسیا)</td></tr>
+        <tr><td>&lt;rt&gt;</td><td>کوچک بالا</td><td>متن تلفظ داخل ruby</td></tr>
+        <tr><td>&lt;rp&gt;</td><td>—</td><td>پرانتز جایگزین برای مرورگرهای بدون پشتیبانی ruby</td></tr>
+      </table>
+
+      <h3>مثال‌های عملی</h3>
+      <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">نمونه‌های ترکیبی</span></div>
+<pre><code><span class="tag">&lt;p&gt;</span><span class="txt">فرمول آب </span>H<span class="tag">&lt;sub&gt;</span><span class="txt">2</span><span class="tag">&lt;/sub&gt;</span><span class="txt">O و توان </span>x<span class="tag">&lt;sup&gt;</span><span class="txt">2</span><span class="tag">&lt;/sup&gt;</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="txt">برای کپی </span><span class="tag">&lt;kbd&gt;</span><span class="txt">Ctrl+C</span><span class="tag">&lt;/kbd&gt;</span><span class="txt"> را بزن.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;abbr</span> <span class="attr">title</span>=<span class="val">"HyperText Markup Language"</span><span class="tag">&gt;</span><span class="txt">HTML</span><span class="tag">&lt;/abbr&gt;</span>
+<span class="tag">&lt;time</span> <span class="attr">datetime</span>=<span class="val">"2024-01-15"</span><span class="tag">&gt;</span><span class="txt">۱۵ ژانویه</span><span class="tag">&lt;/time&gt;</span>
+<span class="cmt">&lt;!-- bdi برای نام انگلیسی وسط متن فارسی --&gt;</span>
+<span class="tag">&lt;p&gt;</span><span class="txt">کاربر </span><span class="tag">&lt;bdi&gt;</span><span class="txt">username123</span><span class="tag">&lt;/bdi&gt;</span><span class="txt"> امتیاز گرفت.</span><span class="tag">&lt;/p&gt;</span></code></pre></div>
+
+      <div class="live-demo"><span class="live-label">🖥️ خروجی زنده</span>
+        <p style="color:#1a1a1a;margin:0 0 6px;">آب: H<sub>2</sub>O — توان: x<sup>2</sup></p>
+        <p style="color:#1a1a1a;margin:0 0 6px;"><strong>پررنگ مهم</strong> · <em>تأکید کج</em> · <mark>هایلایت</mark> · <del>حذف</del> · <ins>افزوده</ins></p>
+        <p style="color:#1a1a1a;margin:0;">کلید: <kbd style="background:#eee;border:1px solid #999;border-radius:4px;padding:1px 6px;">Ctrl</kbd> + <kbd style="background:#eee;border:1px solid #999;border-radius:4px;padding:1px 6px;">C</kbd></p>
+      </div>
+
+      <div class="box box-tip"><div class="box-title">💡 strong/b و em/i</div><p><b>strong</b> و <b>em</b> «معنا» دارند (اهمیت و تأکید) و برای SEO و صفحه‌خوان بهترند. <b>b</b> و <b>i</b> فقط ظاهری‌اند. وقتی شک داری، نسخه معنایی را انتخاب کن.</p></div>
+    </section>
+    <!-- ════════ فصل ۷: لینک‌ها ════════ -->
+    <section class="chapter" id="ch-links">
+      <div class="chapter-header">
+        <span class="chapter-badge">۷</span>
+        <div>
+          <h2>لینک‌ها — تگ &lt;a&gt; کامل</h2>
+          <span class="sub">قلب وب — تمام صفت‌ها و انواع مسیر</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;a&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-pill pill-inline">تعاملی</span><span class="tag-desc-head">پیوند (anchor) به صفحات، فایل‌ها، ایمیل و...</span></div>
+        <div class="tag-card-body">
+          <h4>تمام صفت‌های &lt;a&gt;:</h4>
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>href</td><td>آدرس مقصد (URL، #id، mailto:، tel:، javascript:)</td></tr>
+            <tr><td>target</td><td>محل باز شدن: _blank (تب جدید)، _self (همینجا)، _parent، _top، نام frame</td></tr>
+            <tr><td>rel</td><td>رابطه: noopener, noreferrer, nofollow, next, prev, external, author</td></tr>
+            <tr><td>download</td><td>دانلود فایل به‌جای باز کردن (می‌توان نام فایل را تعیین کرد)</td></tr>
+            <tr><td>hreflang</td><td>زبان سند مقصد</td></tr>
+            <tr><td>type</td><td>نوع MIME مقصد</td></tr>
+            <tr><td>ping</td><td>آدرس‌هایی که هنگام کلیک پینگ می‌شوند (ردیابی)</td></tr>
+            <tr><td>referrerpolicy</td><td>سیاست ارسال اطلاعات referrer</td></tr>
+          </table>
+
+          <h4>انواع مسیر:</h4>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">انواع href</span></div>
+<pre><code><span class="cmt">&lt;!-- مطلق (سایت دیگر) --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://site.com"</span><span class="tag">&gt;</span><span class="txt">سایت</span><span class="tag">&lt;/a&gt;</span>
+<span class="cmt">&lt;!-- نسبی (فایل خودت) --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"pages/about.html"</span><span class="tag">&gt;</span><span class="txt">درباره</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"../index.html"</span><span class="tag">&gt;</span><span class="txt">یک پوشه بالا</span><span class="tag">&lt;/a&gt;</span>
+<span class="cmt">&lt;!-- لنگر داخل همین صفحه --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#section3"</span><span class="tag">&gt;</span><span class="txt">پرش به بخش</span><span class="tag">&lt;/a&gt;</span>
+<span class="cmt">&lt;!-- ایمیل (با موضوع و متن) --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c4a584a6eaa7aba9">[email&#160;protected]</a>?subject=سلام&body=متن"</span><span class="tag">&gt;</span><span class="txt">ایمیل</span><span class="tag">&lt;/a&gt;</span>
+<span class="cmt">&lt;!-- تماس / پیامک --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"tel:+989120000000"</span><span class="tag">&gt;</span><span class="txt">تماس</span><span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"sms:+989120000000"</span><span class="tag">&gt;</span><span class="txt">پیامک</span><span class="tag">&lt;/a&gt;</span>
+<span class="cmt">&lt;!-- دانلود فایل با نام دلخواه --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"file.pdf"</span> <span class="attr">download</span>=<span class="val">"راهنما.pdf"</span><span class="tag">&gt;</span><span class="txt">دانلود</span><span class="tag">&lt;/a&gt;</span></code></pre></div>
+
+          <div class="box box-danger"><div class="box-title">🔐 نکته امنیتی مهم</div><p>هنگام استفاده از <span class="kw">target="_blank"</span>، حتماً <span class="kw">rel="noopener noreferrer"</span> اضافه کن. بدون آن، صفحه مقصد می‌تواند به صفحه تو دسترسی پیدا کند (حمله tabnabbing). مرورگرهای مدرن این را خودکار انجام می‌دهند اما برای اطمینان بنویسش.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۸: رسانه ════════ -->
+    <section class="chapter" id="ch-media">
+      <div class="chapter-header">
+        <span class="chapter-badge">۸</span>
+        <div>
+          <h2>تصاویر و رسانه</h2>
+          <span class="sub">تمام تگ‌های نمایش عکس، صوت و ویدیو</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;img&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">نمایش تصویر</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>src</td><td>آدرس تصویر (اجباری)</td></tr>
+            <tr><td>alt</td><td>متن جایگزین (اجباری برای دسترسی‌پذیری)</td></tr>
+            <tr><td>width / height</td><td>ابعاد به پیکسل (از پرش چیدمان جلوگیری می‌کند)</td></tr>
+            <tr><td>loading</td><td>lazy (بارگذاری تنبل) یا eager (فوری)</td></tr>
+            <tr><td>srcset</td><td>چند تصویر با اندازه‌های مختلف برای صفحات مختلف</td></tr>
+            <tr><td>sizes</td><td>اندازه نمایش در شرایط مختلف (همراه srcset)</td></tr>
+            <tr><td>decoding</td><td>نحوه رمزگشایی: async, sync, auto</td></tr>
+            <tr><td>crossorigin</td><td>تنظیمات CORS</td></tr>
+            <tr><td>usemap</td><td>اتصال به نقشه تصویر (image map)</td></tr>
+            <tr><td>ismap</td><td>نقشه سمت سرور</td></tr>
+            <tr><td>referrerpolicy</td><td>سیاست referrer</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">img ریسپانسیو</span></div>
+<pre><code><span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"small.jpg"</span>
+     <span class="attr">srcset</span>=<span class="val">"small.jpg 480w, large.jpg 1080w"</span>
+     <span class="attr">sizes</span>=<span class="val">"(max-width: 600px) 480px, 1080px"</span>
+     <span class="attr">alt</span>=<span class="val">"منظره"</span> <span class="attr">loading</span>=<span class="val">"lazy"</span><span class="tag">&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;picture&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">انتخاب هوشمند تصویر بر اساس شرایط</span></div>
+        <div class="tag-card-body">
+          <p>به مرورگر اجازه می‌دهد از بین چند منبع، بهترین تصویر را انتخاب کند (مثلاً فرمت webp اگر پشتیبانی شود، یا تصویر متفاوت در موبایل).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">picture</span></div>
+<pre><code><span class="tag">&lt;picture&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">srcset</span>=<span class="val">"image.webp"</span> <span class="attr">type</span>=<span class="val">"image/webp"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">srcset</span>=<span class="val">"image.jpg"</span> <span class="attr">type</span>=<span class="val">"image/jpeg"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"image.jpg"</span> <span class="attr">alt</span>=<span class="val">"عکس"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/picture&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;video&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">پخش‌کننده ویدیو</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>src</td><td>آدرس ویدیو (یا از تگ source استفاده کن)</td></tr>
+            <tr><td>controls</td><td>نمایش دکمه‌های پخش (بولی)</td></tr>
+            <tr><td>autoplay</td><td>پخش خودکار (بولی، نیاز به muted دارد)</td></tr>
+            <tr><td>muted</td><td>بی‌صدا (بولی)</td></tr>
+            <tr><td>loop</td><td>تکرار (بولی)</td></tr>
+            <tr><td>poster</td><td>تصویر پیش‌نمایش قبل از پخش</td></tr>
+            <tr><td>preload</td><td>none / metadata / auto</td></tr>
+            <tr><td>width / height</td><td>ابعاد پخش‌کننده</td></tr>
+            <tr><td>playsinline</td><td>پخش درون‌خطی در موبایل (بدون تمام‌صفحه)</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">video کامل</span></div>
+<pre><code><span class="tag">&lt;video</span> <span class="attr">controls</span> <span class="attr">poster</span>=<span class="val">"thumb.jpg"</span> <span class="attr">width</span>=<span class="val">"640"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="val">"movie.webm"</span> <span class="attr">type</span>=<span class="val">"video/webm"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="val">"movie.mp4"</span> <span class="attr">type</span>=<span class="val">"video/mp4"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;track</span> <span class="attr">src</span>=<span class="val">"subs.vtt"</span> <span class="attr">kind</span>=<span class="val">"subtitles"</span> <span class="attr">srclang</span>=<span class="val">"fa"</span> <span class="attr">label</span>=<span class="val">"فارسی"</span><span class="tag">&gt;</span>
+  <span class="txt">مرورگر شما از ویدیو پشتیبانی نمی‌کند.</span>
+<span class="tag">&lt;/video&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;audio&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">پخش‌کننده صوت</span></div>
+        <div class="tag-card-body"><p>صفت‌های مشابه video دارد (controls, autoplay, muted, loop, preload, src). برای موزیک و پادکست.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;source&gt;</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">یک منبع رسانه‌ای جایگزین برای video/audio/picture</span></div>
+        <div class="tag-card-body"><p>مرورگر اولین منبعی را که پشتیبانی می‌کند استفاده می‌کند. صفت‌ها: <span class="kw">src</span>, <span class="kw">type</span>, <span class="kw">srcset</span>, <span class="kw">media</span>, <span class="kw">sizes</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;track&gt;</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">زیرنویس و متن برای video/audio</span></div>
+        <div class="tag-card-body"><p>صفت <span class="kw">kind</span> می‌تواند subtitles، captions، descriptions، chapters یا metadata باشد. از فایل‌های فرمت WebVTT استفاده می‌کند.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;map&gt; &lt;area&gt;</span><span class="tag-desc-head">نقشه تصویر — تعریف نواحی کلیک‌شونده روی یک عکس</span></div>
+        <div class="tag-card-body">
+          <p>با این دو، می‌توانی بخش‌های مختلف یک تصویر را به لینک‌های متفاوت وصل کنی (مثل نقشه جغرافیایی کلیک‌شونده).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">image map</span></div>
+<pre><code><span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"map.png"</span> <span class="attr">usemap</span>=<span class="val">"#m"</span> <span class="attr">alt</span>=<span class="val">"نقشه"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;map</span> <span class="attr">name</span>=<span class="val">"m"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;area</span> <span class="attr">shape</span>=<span class="val">"rect"</span> <span class="attr">coords</span>=<span class="val">"0,0,100,100"</span> <span class="attr">href</span>=<span class="val">"a.html"</span> <span class="attr">alt</span>=<span class="val">"بخش A"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;area</span> <span class="attr">shape</span>=<span class="val">"circle"</span> <span class="attr">coords</span>=<span class="val">"200,200,50"</span> <span class="attr">href</span>=<span class="val">"b.html"</span> <span class="attr">alt</span>=<span class="val">"بخش B"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/map&gt;</span></code></pre></div>
+          <p><span class="kw">shape</span> می‌تواند rect (مستطیل)، circle (دایره)، poly (چندضلعی) یا default باشد.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۹: تعبیه‌شده ════════ -->
+    <section class="chapter" id="ch-embed">
+      <div class="chapter-header">
+        <span class="chapter-badge">۹</span>
+        <div>
+          <h2>محتوای تعبیه‌شده (Embedded)</h2>
+          <span class="sub">جاسازی صفحات، اپلیکیشن‌ها و محتوای خارجی</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;iframe&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">جاسازی یک صفحه وب کامل داخل صفحه فعلی</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>src</td><td>آدرس صفحه‌ای که جاسازی می‌شود</td></tr>
+            <tr><td>srcdoc</td><td>محتوای HTML مستقیم (به‌جای src)</td></tr>
+            <tr><td>width / height</td><td>ابعاد قاب</td></tr>
+            <tr><td>sandbox</td><td>محدودیت‌های امنیتی (allow-scripts, allow-forms...)</td></tr>
+            <tr><td>allow</td><td>مجوزهای ویژگی (camera, microphone, fullscreen)</td></tr>
+            <tr><td>loading</td><td>lazy / eager</td></tr>
+            <tr><td>referrerpolicy</td><td>سیاست referrer</td></tr>
+            <tr><td>name</td><td>نام قاب (هدف لینک‌ها)</td></tr>
+          </table>
+          <div class="box box-danger"><div class="box-title">🔐 sandbox برای امنیت</div><p>صفت <span class="kw">sandbox</span> محتوای iframe را در محیط محدود اجرا می‌کند. این برای جاسازی محتوای غیرقابل‌اعتماد حیاتی است.</p></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;embed&gt;</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">جاسازی محتوای خارجی توسط پلاگین (PDF، Flash قدیمی)</span></div>
+        <div class="tag-card-body"><p>صفت‌ها: <span class="kw">src</span>, <span class="kw">type</span>, <span class="kw">width</span>, <span class="kw">height</span>. امروزه کمتر استفاده می‌شود.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;object&gt; &lt;param&gt;</span><span class="tag-desc-head">جاسازی منبع خارجی (PDF, SVG, محتوای چندرسانه‌ای)</span></div>
+        <div class="tag-card-body">
+          <p>انعطاف‌پذیرتر از embed. <span class="kw">&lt;param&gt;</span> (خالی) برای ارسال پارامتر به object استفاده می‌شد.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">object</span></div>
+<pre><code><span class="tag">&lt;object</span> <span class="attr">data</span>=<span class="val">"doc.pdf"</span> <span class="attr">type</span>=<span class="val">"application/pdf"</span> <span class="attr">width</span>=<span class="val">"600"</span><span class="tag">&gt;</span>
+  <span class="txt">نمایش PDF ممکن نیست.</span>
+<span class="tag">&lt;/object&gt;</span></code></pre></div>
+        </div>
+      </div>
+    </section>
+    <!-- ════════ فصل ۱۰: لیست‌ها ════════ -->
+    <section class="chapter" id="ch-lists">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۰</span>
+        <div>
+          <h2>لیست‌ها (Lists)</h2>
+          <span class="sub">سازماندهی داده‌ها به‌صورت ترتیبی، نامرتب و تعریفی</span>
+        </div>
+      </div>
+
+      <div class="box box-info"><div class="box-title">💡 سه نوع لیست</div><p>HTML سه خانوادهٔ لیست دارد: <span class="kw">نامرتب</span> (ul) برای آیتم‌هایی که ترتیب اهمیت ندارد، <span class="kw">مرتب</span> (ol) برای آیتم‌های شماره‌دار، و <span class="kw">تعریفی</span> (dl) برای جفت‌های اصطلاح/توضیح.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;ul&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست نامرتب (Unordered List) — نقطه‌ای / گلوله‌ای</span></div>
+        <div class="tag-card-body">
+          <p>برای فهرستی از آیتم‌ها که ترتیبشان مهم نیست. هر آیتم باید داخل <span class="kw">&lt;li&gt;</span> باشد.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">ul</span></div>
+<pre><code><span class="tag">&lt;ul&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">سیب</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">پرتقال</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">موز</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span></code></pre></div>
+          <p>شکل گلوله را با CSS (<span class="kw">list-style-type</span>: disc / circle / square / none) کنترل کن — نه با صفت‌های HTML قدیمی.</p>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;ol&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست مرتب (Ordered List) — شماره‌دار</span></div>
+        <div class="tag-card-body">
+          <p>برای آیتم‌هایی که ترتیب اهمیت دارد (مراحل، رتبه‌بندی). دارای صفت‌های قدرتمند:</p>
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>type</td><td>نوع شماره‌گذاری: 1 (عدد)، A (حروف بزرگ)، a (حروف کوچک)، I (رومی بزرگ)، i (رومی کوچک)</td></tr>
+            <tr><td>start</td><td>شماره شروع (مثلاً start="5" یعنی از ۵ شروع کن)</td></tr>
+            <tr><td>reversed</td><td>شماره‌گذاری معکوس (نزولی)</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">ol</span></div>
+<pre><code><span class="tag">&lt;ol</span> <span class="attr">type</span>=<span class="val">"I"</span> <span class="attr">start</span>=<span class="val">"3"</span> <span class="attr">reversed</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;li&gt;</span><span class="txt">مرحله سوم</span><span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;li</span> <span class="attr">value</span>=<span class="val">"10"</span><span class="tag">&gt;</span><span class="txt">پرش به ۱۰</span><span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ol&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;li&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">آیتم لیست (List Item)</span></div>
+        <div class="tag-card-body">
+          <p>تنها فرزند مجاز مستقیم ul و ol. صفت <span class="kw">value</span> فقط داخل ol معنا دارد و شمارهٔ آن آیتم را دستی تعیین می‌کند. می‌توان لیست‌ها را تو در تو کرد (یک ul/ol داخل یک li).</p>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست تعریفی (Description List)</span></div>
+        <div class="tag-card-body">
+          <p>برای جفت‌های اصطلاح و توضیح (واژه‌نامه، متادیتا، سوال‌وجواب). <span class="kw">&lt;dt&gt;</span> = اصطلاح، <span class="kw">&lt;dd&gt;</span> = توضیح. یک dt می‌تواند چند dd داشته باشد و برعکس.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">dl</span></div>
+<pre><code><span class="tag">&lt;dl&gt;</span>
+  <span class="tag">&lt;dt&gt;</span><span class="txt">HTML</span><span class="tag">&lt;/dt&gt;</span>
+  <span class="tag">&lt;dd&gt;</span><span class="txt">زبان نشانه‌گذاری ساختار وب</span><span class="tag">&lt;/dd&gt;</span>
+  <span class="tag">&lt;dt&gt;</span><span class="txt">CSS</span><span class="tag">&lt;/dt&gt;</span>
+  <span class="tag">&lt;dd&gt;</span><span class="txt">زبان استایل‌دهی</span><span class="tag">&lt;/dd&gt;</span>
+<span class="tag">&lt;/dl&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;menu&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">لیست دستورات/گزینه‌ها (معادل معنایی ul برای ابزارها)</span></div>
+        <div class="tag-card-body">
+          <p>در HTML امروزی، <span class="kw">menu</span> معادل معنایی ul است اما برای فهرستی از فرمان‌ها/دکمه‌ها (مثل نوار ابزار). در گذشته صفت <span class="kw">type</span> (context/toolbar) داشت که حالا منسوخ شده است.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۱: جدول‌ها ════════ -->
+    <section class="chapter" id="ch-tables">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۱</span>
+        <div>
+          <h2>جدول‌ها (Tables)</h2>
+          <span class="sub">نمایش داده‌های دوبعدی به‌صورت ردیف و ستون</span>
+        </div>
+      </div>
+
+      <div class="box box-warn"><div class="box-title">⚠️ جدول فقط برای داده</div><p>جدول‌ها <strong>فقط</strong> برای داده‌های جدولی واقعی‌اند، نه برای چیدمان صفحه (layout). برای چیدمان از CSS Grid و Flexbox استفاده کن.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;table&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">جعبهٔ اصلی جدول که همه اجزا را در بر می‌گیرد</span></div>
+        <div class="tag-card-body">
+          <p>ساختار کامل و حرفه‌ای یک جدول از این اجزا تشکیل می‌شود:</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">table کامل</span></div>
+<pre><code><span class="tag">&lt;table&gt;</span>
+  <span class="tag">&lt;caption&gt;</span><span class="txt">فروش فصلی</span><span class="tag">&lt;/caption&gt;</span>
+  <span class="tag">&lt;colgroup&gt;</span>
+    <span class="tag">&lt;col</span> <span class="attr">span</span>=<span class="val">"2"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/colgroup&gt;</span>
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;th&gt;</span><span class="txt">محصول</span><span class="tag">&lt;/th&gt;</span><span class="tag">&lt;th&gt;</span><span class="txt">تعداد</span><span class="tag">&lt;/th&gt;</span><span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span><span class="txt">لپ‌تاپ</span><span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span><span class="txt">۱۲</span><span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
+  <span class="tag">&lt;tfoot&gt;</span>
+    <span class="tag">&lt;tr&gt;</span><span class="tag">&lt;td&gt;</span><span class="txt">جمع</span><span class="tag">&lt;/td&gt;</span><span class="tag">&lt;td&gt;</span><span class="txt">۱۲</span><span class="tag">&lt;/td&gt;</span><span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tfoot&gt;</span>
+<span class="tag">&lt;/table&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;caption&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">عنوان/توضیح جدول</span></div>
+        <div class="tag-card-body"><p>باید <strong>اولین فرزند</strong> table باشد. عنوانی برای کل جدول می‌سازد که برای دسترسی‌پذیری مهم است.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;thead&gt; &lt;tbody&gt; &lt;tfoot&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">گروه‌بندی ردیف‌ها به سر، بدنه و پاورقی</span></div>
+        <div class="tag-card-body"><p>این سه عنصر جدول را معنایی می‌کنند. مرورگرها هنگام چاپ، سر و پاورقی را در هر صفحه تکرار می‌کنند. ترتیب نمایش بر اساس thead → tbody → tfoot است حتی اگر tfoot را زودتر بنویسی.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;tr&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">یک ردیف از جدول (Table Row)</span></div>
+        <div class="tag-card-body"><p>هر ردیف مجموعه‌ای از سلول‌ها (th یا td) را در بر می‌گیرد.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;th&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">سلول سرستون (Header Cell)</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>scope</td><td>دامنه سرستون: col (ستون)، row (ردیف)، colgroup، rowgroup — حیاتی برای screen readerها</td></tr>
+            <tr><td>colspan</td><td>تعداد ستون‌هایی که سلول می‌پوشاند</td></tr>
+            <tr><td>rowspan</td><td>تعداد ردیف‌هایی که سلول می‌پوشاند</td></tr>
+            <tr><td>abbr</td><td>نسخه کوتاه‌شده عنوان برای فناوری کمکی</td></tr>
+            <tr><td>headers</td><td>شناسه سلول‌های سرستون مرتبط</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;td&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">سلول داده (Table Data Cell)</span></div>
+        <div class="tag-card-body">
+          <p>صفت‌های <span class="kw">colspan</span> و <span class="kw">rowspan</span> برای ادغام سلول‌ها و <span class="kw">headers</span> برای اتصال به سرستون‌ها.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">ادغام سلول</span></div>
+<pre><code><span class="tag">&lt;td</span> <span class="attr">colspan</span>=<span class="val">"2"</span><span class="tag">&gt;</span><span class="txt">دو ستون</span><span class="tag">&lt;/td&gt;</span>
+<span class="tag">&lt;td</span> <span class="attr">rowspan</span>=<span class="val">"3"</span><span class="tag">&gt;</span><span class="txt">سه ردیف</span><span class="tag">&lt;/td&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;colgroup&gt; &lt;col&gt;</span><span class="tag-pill pill-empty">خالی (col)</span><span class="tag-desc-head">تعریف ستون‌ها برای استایل‌دهی گروهی</span></div>
+        <div class="tag-card-body"><p>با <span class="kw">colgroup</span> و <span class="kw">col</span> می‌توانی به یک یا چند ستون کامل استایل (مثل عرض یا رنگ پس‌زمینه) بدهی بدون اینکه هر سلول را جدا استایل کنی. صفت <span class="kw">span</span> روی col تعداد ستون‌ها را تعیین می‌کند.</p></div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۲: فرم‌ها ════════ -->
+    <section class="chapter" id="ch-forms">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۲</span>
+        <div>
+          <h2>فرم‌ها (Forms)</h2>
+          <span class="sub">قلب تعامل با کاربر — جمع‌آوری و ارسال داده</span>
+        </div>
+      </div>
+
+      <div class="box box-info"><div class="box-title">💡 چرا فرم مهم‌ترین فصل است؟</div><p>هر ورود/ثبت‌نام، جستجو، نظر، خرید و آپلود فایل در وب با فرم انجام می‌شود. این فصل تمام انواع <span class="kw">input</span> و تمام صفت‌هایشان را پوشش می‌دهد.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;form&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">ظرف اصلی فرم که داده‌ها را جمع و ارسال می‌کند</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>action</td><td>آدرس مقصدی که داده‌ها به آن ارسال می‌شوند</td></tr>
+            <tr><td>method</td><td>روش ارسال: get (در URL) یا post (در بدنه درخواست)</td></tr>
+            <tr><td>enctype</td><td>نوع رمزگذاری: application/x-www-form-urlencoded، multipart/form-data (برای فایل)، text/plain</td></tr>
+            <tr><td>target</td><td>محل باز شدن پاسخ: _self، _blank، _parent، _top</td></tr>
+            <tr><td>autocomplete</td><td>on / off — تکمیل خودکار مرورگر</td></tr>
+            <tr><td>novalidate</td><td>غیرفعال کردن اعتبارسنجی داخلی مرورگر</td></tr>
+            <tr><td>name</td><td>نام فرم</td></tr>
+            <tr><td>accept-charset</td><td>کدگذاری کاراکترهای مجاز</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;input&gt;</span><span class="tag-pill pill-empty">خالی</span><span class="tag-desc-head">پرکاربردترین عنصر فرم — با صفت type شکل می‌گیرد</span></div>
+        <div class="tag-card-body">
+          <p>یک تگ، ده‌ها چهره! نوع آن با صفت <span class="kw">type</span> مشخص می‌شود. تمام انواع:</p>
+          <table class="ref-table attr-table">
+            <tr><th>type</th><th>کاربرد</th></tr>
+            <tr><td>text</td><td>متن یک‌خطی ساده</td></tr>
+            <tr><td>password</td><td>رمز عبور (کاراکترها پنهان)</td></tr>
+            <tr><td>email</td><td>ایمیل با اعتبارسنجی فرمت</td></tr>
+            <tr><td>tel</td><td>شماره تلفن (روی موبایل کیبورد عددی)</td></tr>
+            <tr><td>url</td><td>آدرس وب با اعتبارسنجی</td></tr>
+            <tr><td>number</td><td>عدد با فلش بالا/پایین</td></tr>
+            <tr><td>range</td><td>اسلایدر (نوار کشویی)</td></tr>
+            <tr><td>search</td><td>جعبه جستجو</td></tr>
+            <tr><td>checkbox</td><td>چک‌باکس (چند انتخاب)</td></tr>
+            <tr><td>radio</td><td>دکمه رادیویی (یک انتخاب از گروه)</td></tr>
+            <tr><td>date</td><td>انتخابگر تاریخ</td></tr>
+            <tr><td>time</td><td>انتخابگر زمان</td></tr>
+            <tr><td>datetime-local</td><td>تاریخ و زمان محلی</td></tr>
+            <tr><td>month</td><td>انتخاب ماه و سال</td></tr>
+            <tr><td>week</td><td>انتخاب هفته</td></tr>
+            <tr><td>color</td><td>انتخابگر رنگ</td></tr>
+            <tr><td>file</td><td>آپلود فایل</td></tr>
+            <tr><td>hidden</td><td>مقدار پنهان (ارسال می‌شود اما دیده نمی‌شود)</td></tr>
+            <tr><td>submit</td><td>دکمه ارسال فرم</td></tr>
+            <tr><td>reset</td><td>دکمه بازنشانی فرم</td></tr>
+            <tr><td>button</td><td>دکمه عمومی (بدون عمل پیش‌فرض)</td></tr>
+            <tr><td>image</td><td>دکمه ارسال به‌شکل تصویر</td></tr>
+          </table>
+          <p style="margin-top:14px"><strong>صفت‌های مشترک input:</strong></p>
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>name</td><td>نام فیلد (کلید داده هنگام ارسال)</td></tr>
+            <tr><td>value</td><td>مقدار اولیه/فعلی</td></tr>
+            <tr><td>placeholder</td><td>متن راهنمای داخل فیلد</td></tr>
+            <tr><td>required</td><td>اجباری بودن فیلد</td></tr>
+            <tr><td>readonly</td><td>فقط‌خواندنی (قابل ارسال)</td></tr>
+            <tr><td>disabled</td><td>غیرفعال (ارسال نمی‌شود)</td></tr>
+            <tr><td>min / max</td><td>کمینه/بیشینه عدد یا تاریخ</td></tr>
+            <tr><td>step</td><td>گام تغییر عدد/زمان</td></tr>
+            <tr><td>minlength / maxlength</td><td>کمینه/بیشینه طول متن</td></tr>
+            <tr><td>pattern</td><td>الگوی regex برای اعتبارسنجی</td></tr>
+            <tr><td>autocomplete</td><td>on / off / نام فیلد (مثل email, name)</td></tr>
+            <tr><td>autofocus</td><td>تمرکز خودکار هنگام بارگذاری</td></tr>
+            <tr><td>multiple</td><td>چند مقدار (email/file)</td></tr>
+            <tr><td>accept</td><td>نوع فایل مجاز (image/*, .pdf)</td></tr>
+            <tr><td>checked</td><td>پیش‌فرض انتخاب‌شده (checkbox/radio)</td></tr>
+            <tr><td>list</td><td>اتصال به یک datalist</td></tr>
+            <tr><td>form</td><td>اتصال به فرمی با id خاص (خارج از آن)</td></tr>
+            <tr><td>inputmode</td><td>نوع کیبورد موبایل (numeric, decimal, tel...)</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">نمونه‌های input</span></div>
+<pre><code><span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">name</span>=<span class="val">"mail"</span> <span class="attr">required</span> <span class="attr">placeholder</span>=<span class="val">"ایمیل"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"number"</span> <span class="attr">min</span>=<span class="val">"1"</span> <span class="attr">max</span>=<span class="val">"10"</span> <span class="attr">step</span>=<span class="val">"1"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"range"</span> <span class="attr">min</span>=<span class="val">"0"</span> <span class="attr">max</span>=<span class="val">"100"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"file"</span> <span class="attr">accept</span>=<span class="val">"image/*"</span> <span class="attr">multiple</span><span class="tag">&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"color"</span> <span class="attr">value</span>=<span class="val">"#00e5ff"</span><span class="tag">&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;label&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">برچسب توصیفی برای فیلد فرم</span></div>
+        <div class="tag-card-body">
+          <p>کلیک روی label تمرکز را روی فیلد می‌برد. با صفت <span class="kw">for</span> (که برابر id فیلد است) متصل می‌شود یا فیلد را داخل خود می‌گیرد. برای دسترسی‌پذیری حیاتی است.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">label</span></div>
+<pre><code><span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="val">"user"</span><span class="tag">&gt;</span><span class="txt">نام کاربری</span><span class="tag">&lt;/label&gt;</span>
+<span class="tag">&lt;input</span> <span class="attr">id</span>=<span class="val">"user"</span> <span class="attr">type</span>=<span class="val">"text"</span><span class="tag">&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;textarea&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">جعبه متن چندخطی</span></div>
+        <div class="tag-card-body">
+          <p>صفت‌ها: <span class="kw">rows</span> (تعداد خطوط)، <span class="kw">cols</span> (عرض)، <span class="kw">wrap</span> (soft/hard)، <span class="kw">maxlength</span>، <span class="kw">placeholder</span>، <span class="kw">required</span>، <span class="kw">readonly</span>. مقدار اولیه بین تگ باز و بسته نوشته می‌شود، نه در صفت value.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">textarea</span></div>
+<pre><code><span class="tag">&lt;textarea</span> <span class="attr">rows</span>=<span class="val">"4"</span> <span class="attr">cols</span>=<span class="val">"40"</span><span class="tag">&gt;</span><span class="txt">متن پیش‌فرض</span><span class="tag">&lt;/textarea&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;select&gt; &lt;option&gt; &lt;optgroup&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">منوی کشویی (Dropdown)</span></div>
+        <div class="tag-card-body">
+          <p><span class="kw">select</span> منو را می‌سازد، <span class="kw">option</span> هر گزینه و <span class="kw">optgroup</span> گزینه‌ها را دسته‌بندی می‌کند. صفت <span class="kw">multiple</span> روی select چند انتخابی می‌کند، <span class="kw">size</span> تعداد گزینه‌های نمایشی، و <span class="kw">selected</span> روی option گزینهٔ پیش‌فرض را تعیین می‌کند.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">select</span></div>
+<pre><code><span class="tag">&lt;select</span> <span class="attr">name</span>=<span class="val">"city"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;optgroup</span> <span class="attr">label</span>=<span class="val">"شمال"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"rasht"</span><span class="tag">&gt;</span><span class="txt">رشت</span><span class="tag">&lt;/option&gt;</span>
+    <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"sari"</span> <span class="attr">selected</span><span class="tag">&gt;</span><span class="txt">ساری</span><span class="tag">&lt;/option&gt;</span>
+  <span class="tag">&lt;/optgroup&gt;</span>
+<span class="tag">&lt;/select&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;button&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">دکمه با محتوای دلخواه (متن، آیکون، HTML)</span></div>
+        <div class="tag-card-body">
+          <p>برخلاف input[type=button]، می‌تواند محتوای HTML داشته باشد. صفت <span class="kw">type</span>: submit (پیش‌فرض)، reset، button. صفت‌های <span class="kw">formaction</span>، <span class="kw">formmethod</span>، <span class="kw">formtarget</span>، <span class="kw">formnovalidate</span> رفتار ارسال را override می‌کنند.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">button</span></div>
+<pre><code><span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span><span class="tag">&gt;</span><span class="txt">✓ ارسال</span><span class="tag">&lt;/button&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;fieldset&gt; &lt;legend&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">گروه‌بندی فیلدهای مرتبط با عنوان</span></div>
+        <div class="tag-card-body"><p><span class="kw">fieldset</span> چند فیلد را در یک کادر دور هم جمع می‌کند و <span class="kw">legend</span> عنوان آن گروه است. صفت <span class="kw">disabled</span> روی fieldset همه فیلدهای داخلش را غیرفعال می‌کند.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;datalist&gt;</span><span class="tag-pill pill-meta">متادیتا</span><span class="tag-desc-head">لیست پیشنهادهای خودکار برای input</span></div>
+        <div class="tag-card-body">
+          <p>با صفت <span class="kw">list</span> روی input به آن متصل می‌شود و پیشنهادهای تکمیل خودکار می‌دهد (کاربر می‌تواند مقدار دیگری هم تایپ کند).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">datalist</span></div>
+<pre><code><span class="tag">&lt;input</span> <span class="attr">list</span>=<span class="val">"browsers"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;datalist</span> <span class="attr">id</span>=<span class="val">"browsers"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"Chrome"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="val">"Firefox"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/datalist&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;output&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">نمایش نتیجه یک محاسبه</span></div>
+        <div class="tag-card-body"><p>برای نمایش خروجی محاسبات (مثلاً نتیجهٔ یک اسلایدر یا جمع). صفت <span class="kw">for</span> فیلدهای ورودی مرتبط را مشخص می‌کند.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;progress&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">نوار پیشرفت (Progress Bar)</span></div>
+        <div class="tag-card-body"><p>صفت‌های <span class="kw">value</span> (مقدار فعلی) و <span class="kw">max</span> (حداکثر). اگر value نباشد، حالت نامعین (در حال بارگذاری) نشان می‌دهد.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;meter&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">سنجه برای مقدار در یک بازه (مثل میزان دیسک)</span></div>
+        <div class="tag-card-body"><p>صفت‌ها: <span class="kw">value</span>، <span class="kw">min</span>، <span class="kw">max</span>، <span class="kw">low</span>، <span class="kw">high</span>، <span class="kw">optimum</span>. برخلاف progress، برای اندازه‌گیری ثابت است نه پیشرفت.</p></div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۳: تعاملی ════════ -->
+    <section class="chapter" id="ch-interactive">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۳</span>
+        <div>
+          <h2>عناصر تعاملی (Interactive)</h2>
+          <span class="sub">آکاردئون، پنجره و عناصر باز/بسته‌شونده بدون جاوااسکریپت</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;details&gt; &lt;summary&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">بخش باز/بسته‌شونده (آکاردئون) بدون JS</span></div>
+        <div class="tag-card-body">
+          <p>یکی از زیباترین قابلیت‌های HTML مدرن! <span class="kw">summary</span> عنوان قابل کلیک است و بقیه محتوای داخل details با کلیک باز/بسته می‌شود. صفت <span class="kw">open</span> آن را پیش‌فرض باز نگه می‌دارد.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">details</span></div>
+<pre><code><span class="tag">&lt;details</span> <span class="attr">open</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;summary&gt;</span><span class="txt">بیشتر بخوانید</span><span class="tag">&lt;/summary&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">محتوای پنهان که با کلیک نمایان می‌شود.</span><span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/details&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;dialog&gt;</span><span class="tag-pill pill-block">بلوکی</span><span class="tag-desc-head">پنجره گفت‌وگو (Modal / Popup) بومی</span></div>
+        <div class="tag-card-body">
+          <p>پنجرهٔ مودال بومی مرورگر! با متد جاوااسکریپتی <span class="kw">showModal()</span> باز و با <span class="kw">close()</span> بسته می‌شود. صفت <span class="kw">open</span> آن را نمایان می‌کند. مزیت بزرگ: مدیریت تمرکز و بک‌دراپ به‌صورت خودکار.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">dialog</span></div>
+<pre><code><span class="tag">&lt;dialog</span> <span class="attr">id</span>=<span class="val">"m"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;p&gt;</span><span class="txt">سلام!</span><span class="tag">&lt;/p&gt;</span>
+  <span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="val">"m.close()"</span><span class="tag">&gt;</span><span class="txt">بستن</span><span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/dialog&gt;</span></code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۴: اسکریپت‌نویسی ════════ -->
+    <section class="chapter" id="ch-scripting">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۴</span>
+        <div>
+          <h2>اسکریپت‌نویسی و قالب (Scripting)</h2>
+          <span class="sub">جاوااسکریپت، نقاشی پویا و قالب‌های قابل‌استفاده مجدد</span>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;script&gt;</span><span class="tag-pill pill-meta">متادیتا/اجرایی</span><span class="tag-desc-head">جاسازی یا بارگذاری کد جاوااسکریپت</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>src</td><td>آدرس فایل جاوااسکریپت خارجی</td></tr>
+            <tr><td>type</td><td>نوع: text/javascript (پیش‌فرض) یا module (برای ES Modules)</td></tr>
+            <tr><td>async</td><td>دانلود موازی و اجرا به‌محض آماده شدن</td></tr>
+            <tr><td>defer</td><td>اجرا پس از کامل شدن تجزیه HTML (به ترتیب)</td></tr>
+            <tr><td>crossorigin</td><td>تنظیمات CORS برای منبع خارجی</td></tr>
+            <tr><td>integrity</td><td>هش امنیتی (Subresource Integrity)</td></tr>
+            <tr><td>nomodule</td><td>فقط برای مرورگرهای قدیمی که module را نمی‌فهمند</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">script</span></div>
+<pre><code><span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"app.js"</span> <span class="attr">defer</span><span class="tag">&gt;</span><span class="tag">&lt;/script&gt;</span>
+<span class="tag">&lt;script&gt;</span><span class="txt">console.log("سلام دنیا");</span><span class="tag">&lt;/script&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;noscript&gt;</span><span class="tag-pill pill-meta">متادیتا</span><span class="tag-desc-head">محتوای جایگزین وقتی جاوااسکریپت خاموش است</span></div>
+        <div class="tag-card-body"><p>اگر مرورگر JS را اجرا نکند یا کاربر آن را خاموش کرده باشد، محتوای داخل noscript نمایش داده می‌شود.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;canvas&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">بوم نقاشی برای گرافیک پویا با جاوااسکریپت</span></div>
+        <div class="tag-card-body">
+          <p>سطحی برای رسم بازی، نمودار، انیمیشن و پردازش تصویر. با <span class="kw">getContext('2d')</span> یا WebGL کنترل می‌شود. صفت‌های <span class="kw">width</span> و <span class="kw">height</span> ابعاد بوم را تعیین می‌کنند.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">canvas</span></div>
+<pre><code><span class="tag">&lt;canvas</span> <span class="attr">id</span>=<span class="val">"c"</span> <span class="attr">width</span>=<span class="val">"300"</span> <span class="attr">height</span>=<span class="val">"150"</span><span class="tag">&gt;</span><span class="tag">&lt;/canvas&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;template&gt;</span><span class="tag-pill pill-meta">متادیتا</span><span class="tag-desc-head">قالب پنهان برای کلون شدن با جاوااسکریپت</span></div>
+        <div class="tag-card-body"><p>محتوای داخل template رندر نمی‌شود تا زمانی که با JS کلون و به DOM اضافه شود. پایهٔ Web Components است.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;slot&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">جایگاه محتوا در Web Components (Shadow DOM)</span></div>
+        <div class="tag-card-body"><p>محل جایگذاری محتوای دلخواه داخل کامپوننت‌های سفارشی. صفت <span class="kw">name</span> اسلات‌های نام‌دار می‌سازد.</p></div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۵: SVG و MathML ════════ -->
+    <section class="chapter" id="ch-svg">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۵</span>
+        <div>
+          <h2>گرافیک برداری (SVG) و ریاضی (MathML)</h2>
+          <span class="sub">رسم اشکال مقیاس‌پذیر و فرمول‌های ریاضی مستقیم در HTML</span>
+        </div>
+      </div>
+
+      <div class="box box-info"><div class="box-title">💡 SVG چیست؟</div><p>گرافیک برداری مقیاس‌پذیر — تصاویری که با ریاضیات تعریف می‌شوند، در هر اندازه‌ای واضح‌اند و مستقیماً داخل HTML نوشته می‌شوند.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;svg&gt;</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">ظرف اصلی گرافیک برداری</span></div>
+        <div class="tag-card-body">
+          <p>صفت‌های مهم: <span class="kw">width</span>، <span class="kw">height</span>، <span class="kw">viewBox</span> (سیستم مختصات داخلی)، <span class="kw">xmlns</span>. تگ‌های فرزند: rect, circle, ellipse, line, polyline, polygon, path, text, g (گروه)، defs، linearGradient و...</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">svg</span></div>
+<pre><code><span class="tag">&lt;svg</span> <span class="attr">viewBox</span>=<span class="val">"0 0 100 100"</span> <span class="attr">width</span>=<span class="val">"120"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;circle</span> <span class="attr">cx</span>=<span class="val">"50"</span> <span class="attr">cy</span>=<span class="val">"50"</span> <span class="attr">r</span>=<span class="val">"40"</span> <span class="attr">fill</span>=<span class="val">"#00e5ff"</span><span class="tag">&gt;</span><span class="tag">&lt;/circle&gt;</span>
+  <span class="tag">&lt;rect</span> <span class="attr">x</span>=<span class="val">"10"</span> <span class="attr">y</span>=<span class="val">"10"</span> <span class="attr">width</span>=<span class="val">"30"</span> <span class="attr">height</span>=<span class="val">"30"</span><span class="tag">&gt;</span><span class="tag">&lt;/rect&gt;</span>
+<span class="tag">&lt;/svg&gt;</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">تگ‌های اصلی SVG</span><span class="tag-desc-head">مجموعهٔ کامل اشکال و عناصر</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>تگ</th><th>کاربرد</th></tr>
+            <tr><td>&lt;rect&gt;</td><td>مستطیل (x, y, width, height, rx)</td></tr>
+            <tr><td>&lt;circle&gt;</td><td>دایره (cx, cy, r)</td></tr>
+            <tr><td>&lt;ellipse&gt;</td><td>بیضی (cx, cy, rx, ry)</td></tr>
+            <tr><td>&lt;line&gt;</td><td>خط (x1, y1, x2, y2)</td></tr>
+            <tr><td>&lt;polyline&gt;</td><td>چند خط متصل</td></tr>
+            <tr><td>&lt;polygon&gt;</td><td>چندضلعی بسته</td></tr>
+            <tr><td>&lt;path&gt;</td><td>مسیر آزاد (قدرتمندترین — با دستورات M, L, C, Z)</td></tr>
+            <tr><td>&lt;text&gt;</td><td>متن برداری</td></tr>
+            <tr><td>&lt;g&gt;</td><td>گروه‌بندی عناصر</td></tr>
+            <tr><td>&lt;defs&gt;</td><td>تعاریف قابل استفاده مجدد</td></tr>
+            <tr><td>&lt;linearGradient&gt; / &lt;radialGradient&gt;</td><td>گرادیان‌ها</td></tr>
+            <tr><td>&lt;use&gt;</td><td>استفاده مجدد از عنصر تعریف‌شده</td></tr>
+            <tr><td>&lt;animate&gt;</td><td>انیمیشن SMIL</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;math&gt; (MathML)</span><span class="tag-pill pill-inline">درون‌خطی</span><span class="tag-desc-head">نمایش فرمول‌های ریاضی</span></div>
+        <div class="tag-card-body">
+          <p>زبان نشانه‌گذاری ریاضی. تگ‌های اصلی: <span class="kw">mrow</span> (ردیف)، <span class="kw">mi</span> (شناسه)، <span class="kw">mn</span> (عدد)، <span class="kw">mo</span> (عملگر)، <span class="kw">msup</span> (توان)، <span class="kw">msub</span> (زیرنویس)، <span class="kw">mfrac</span> (کسر)، <span class="kw">msqrt</span> (جذر)، <span class="kw">mroot</span> (ریشه n-ام).</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">MathML</span></div>
+<pre><code><span class="tag">&lt;math&gt;</span>
+  <span class="tag">&lt;msup&gt;</span><span class="tag">&lt;mi&gt;</span><span class="txt">x</span><span class="tag">&lt;/mi&gt;</span><span class="tag">&lt;mn&gt;</span><span class="txt">2</span><span class="tag">&lt;/mn&gt;</span><span class="tag">&lt;/msup&gt;</span>
+<span class="tag">&lt;/math&gt;</span></code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۶: صفت‌های سراسری ════════ -->
+    <section class="chapter" id="ch-global">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۶</span>
+        <div>
+          <h2>صفت‌های سراسری (Global Attributes)</h2>
+          <span class="sub">صفت‌هایی که روی <strong>هر</strong> تگ HTML کار می‌کنند</span>
+        </div>
+      </div>
+
+      <div class="box box-info"><div class="box-title">💡 سراسری یعنی چه؟</div><p>این صفت‌ها مخصوص یک تگ نیستند — روی <strong>تمام</strong> عناصر HTML قابل استفاده‌اند. شناختشان سوپرپاور توست!</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">صفت‌های هویتی و استایل</span><span class="tag-desc-head">شناسایی و ظاهر عناصر</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>id</td><td>شناسه یکتا در صفحه (برای CSS، JS، لینک لنگری)</td></tr>
+            <tr><td>class</td><td>یک یا چند نام کلاس (با فاصله) برای گروه‌بندی استایل</td></tr>
+            <tr><td>style</td><td>استایل CSS درون‌خطی (inline)</td></tr>
+            <tr><td>title</td><td>متن راهنمای شناور (tooltip)</td></tr>
+            <tr><td>hidden</td><td>پنهان کردن کامل عنصر (hidden یا hidden="until-found")</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">صفت‌های زبان و جهت</span><span class="tag-desc-head">بومی‌سازی و دسترسی‌پذیری</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>lang</td><td>زبان محتوا (fa، en، ar...)</td></tr>
+            <tr><td>dir</td><td>جهت متن: rtl (راست‌به‌چپ)، ltr، auto</td></tr>
+            <tr><td>translate</td><td>yes / no — آیا ترجمه خودکار شود</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">صفت‌های تعاملی و ویرایش</span><span class="tag-desc-head">قابلیت‌های تعاملی روی هر عنصر</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>contenteditable</td><td>true / false — قابل ویرایش کردن محتوا توسط کاربر</td></tr>
+            <tr><td>draggable</td><td>true / false — قابل کشیدن (Drag &amp; Drop)</td></tr>
+            <tr><td>spellcheck</td><td>true / false — بررسی املا</td></tr>
+            <tr><td>tabindex</td><td>ترتیب حرکت با کلید Tab (0، مثبت یا -1)</td></tr>
+            <tr><td>accesskey</td><td>میانبر صفحه‌کلید</td></tr>
+            <tr><td>autocapitalize</td><td>بزرگ‌نویسی خودکار (none، sentences، words، characters)</td></tr>
+            <tr><td>inputmode</td><td>نوع کیبورد مجازی (numeric، tel، email، url، decimal)</td></tr>
+            <tr><td>enterkeyhint</td><td>برچسب کلید Enter موبایل (search، send، go، done)</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">data-* (صفت‌های داده سفارشی)</span><span class="tag-pill pill-block">ویژه</span><span class="tag-desc-head">ذخیره داده‌های دلخواه روی عناصر</span></div>
+        <div class="tag-card-body">
+          <p>یکی از قدرتمندترین قابلیت‌ها! هر صفتی که با <span class="kw">data-</span> شروع شود معتبر است و با JS از طریق <span class="kw">element.dataset</span> خوانده می‌شود.</p>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">data-*</span></div>
+<pre><code><span class="tag">&lt;div</span> <span class="attr">data-user-id</span>=<span class="val">"42"</span> <span class="attr">data-role</span>=<span class="val">"admin"</span><span class="tag">&gt;</span><span class="tag">&lt;/div&gt;</span>
+<span class="cmt">// JS: el.dataset.userId → "42"</span></code></pre></div>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">صفت‌های دسترسی‌پذیری (ARIA) و سایر</span><span class="tag-desc-head">پل ارتباطی با فناوری‌های کمکی</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت</th><th>کاربرد</th></tr>
+            <tr><td>role</td><td>نقش معنایی عنصر برای screen reader</td></tr>
+            <tr><td>aria-*</td><td>خانوادهٔ صفت‌های ARIA (aria-label, aria-hidden, aria-expanded...)</td></tr>
+            <tr><td>part</td><td>نام بخش برای استایل‌دهی از بیرون Shadow DOM</td></tr>
+            <tr><td>slot</td><td>اختصاص عنصر به یک اسلات نام‌دار</td></tr>
+            <tr><td>itemprop / itemscope / itemtype</td><td>Microdata برای داده‌های ساختاریافته (SEO)</td></tr>
+            <tr><td>nonce</td><td>توکن امنیتی CSP</td></tr>
+            <tr><td>is</td><td>ساخت عنصر سفارشی داخلی</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۷: صفت‌های رویداد ════════ -->
+    <section class="chapter" id="ch-events">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۷</span>
+        <div>
+          <h2>صفت‌های رویداد (Event Attributes)</h2>
+          <span class="sub">واکنش به کلیک، تایپ، حرکت موس و... مستقیم در HTML</span>
+        </div>
+      </div>
+
+      <div class="box box-warn"><div class="box-title">⚠️ نکتهٔ حرفه‌ای</div><p>اگرچه می‌توانی رویدادها را مستقیم در HTML بنویسی (<span class="kw">onclick="..."</span>)، روش حرفه‌ای استفاده از <span class="kw">addEventListener</span> در جاوااسکریپت است (جدا کردن منطق از ساختار).</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">رویدادهای موس</span><span class="tag-desc-head">واکنش به اشاره‌گر</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>رویداد</th><th>زمان فعال شدن</th></tr>
+            <tr><td>onclick</td><td>کلیک تک</td></tr>
+            <tr><td>ondblclick</td><td>دابل‌کلیک</td></tr>
+            <tr><td>onmousedown / onmouseup</td><td>فشردن / رها کردن دکمه موس</td></tr>
+            <tr><td>onmouseover / onmouseout</td><td>ورود / خروج موس از عنصر</td></tr>
+            <tr><td>onmousemove</td><td>حرکت موس روی عنصر</td></tr>
+            <tr><td>onmouseenter / onmouseleave</td><td>ورود/خروج (بدون bubbling)</td></tr>
+            <tr><td>oncontextmenu</td><td>کلیک راست</td></tr>
+            <tr><td>onwheel</td><td>چرخش اسکرول موس</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">رویدادهای صفحه‌کلید و فرم</span><span class="tag-desc-head">واکنش به تایپ و ورودی</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>رویداد</th><th>زمان فعال شدن</th></tr>
+            <tr><td>onkeydown / onkeyup</td><td>فشردن / رها کردن کلید</td></tr>
+            <tr><td>onkeypress</td><td>فشردن کلید (منسوخ)</td></tr>
+            <tr><td>oninput</td><td>تغییر مقدار ورودی (لحظه‌ای)</td></tr>
+            <tr><td>onchange</td><td>تغییر مقدار پس از خروج از فیلد</td></tr>
+            <tr><td>onfocus / onblur</td><td>گرفتن / از دست دادن تمرکز</td></tr>
+            <tr><td>onsubmit</td><td>ارسال فرم</td></tr>
+            <tr><td>onreset</td><td>بازنشانی فرم</td></tr>
+            <tr><td>onselect</td><td>انتخاب متن در فیلد</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">رویدادهای پنجره، رسانه و کشیدن</span><span class="tag-desc-head">بارگذاری، پخش و Drag &amp; Drop</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>رویداد</th><th>زمان فعال شدن</th></tr>
+            <tr><td>onload / onunload</td><td>بارگذاری / ترک صفحه</td></tr>
+            <tr><td>onresize</td><td>تغییر اندازه پنجره</td></tr>
+            <tr><td>onscroll</td><td>اسکرول صفحه</td></tr>
+            <tr><td>onerror</td><td>خطا در بارگذاری منبع</td></tr>
+            <tr><td>onplay / onpause / onended</td><td>پخش / مکث / پایان رسانه</td></tr>
+            <tr><td>ontimeupdate</td><td>تغییر زمان پخش</td></tr>
+            <tr><td>ondragstart / ondrag / ondragend</td><td>شروع / حین / پایان کشیدن</td></tr>
+            <tr><td>ondrop / ondragover</td><td>رها کردن / عبور هنگام کشیدن</td></tr>
+            <tr><td>oncopy / oncut / onpaste</td><td>کپی / برش / چسباندن</td></tr>
+          </table>
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">نمونه رویداد</span></div>
+<pre><code><span class="tag">&lt;button</span> <span class="attr">onclick</span>=<span class="val">"alert('کلیک شد!')"</span><span class="tag">&gt;</span><span class="txt">بزن</span><span class="tag">&lt;/button&gt;</span></code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ فصل ۱۸: موجودیت‌ها ════════ -->
+    <section class="chapter" id="ch-entities">
+      <div class="chapter-header">
+        <span class="chapter-badge">۱۸</span>
+        <div>
+          <h2>موجودیت‌های HTML (Entities)</h2>
+          <span class="sub">نمایش کاراکترهای ویژه و رزرو‌شده</span>
+        </div>
+      </div>
+
+      <div class="box box-info"><div class="box-title">💡 چرا entity لازم است؟</div><p>کاراکترهایی مثل <span class="kw">&lt;</span> و <span class="kw">&gt;</span> در HTML معنای ساختاری دارند. برای نمایش خودِ این کاراکترها باید از کد جایگزین (entity) استفاده کنی. هر entity با <span class="kw">&amp;</span> شروع و با <span class="kw">;</span> تمام می‌شود.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">موجودیت‌های ضروری</span><span class="tag-desc-head">کاراکترهای رزرو‌شده HTML</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>کد</th><th>نتیجه</th><th>نام</th></tr>
+            <tr><td>&amp;lt;</td><td>&lt;</td><td>کوچک‌تر از</td></tr>
+            <tr><td>&amp;gt;</td><td>&gt;</td><td>بزرگ‌تر از</td></tr>
+            <tr><td>&amp;amp;</td><td>&amp;</td><td>اَمپرسند</td></tr>
+            <tr><td>&amp;quot;</td><td>&quot;</td><td>گیومه دوتایی</td></tr>
+            <tr><td>&amp;apos;</td><td>&#39;</td><td>گیومه تکی</td></tr>
+            <tr><td>&amp;nbsp;</td><td>(فاصله)</td><td>فاصلهٔ غیرشکننده</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">نمادها و علائم پرکاربرد</span><span class="tag-desc-head">حق کپی، ارز، ریاضی و جهت</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>کد</th><th>نتیجه</th><th>توضیح</th></tr>
+            <tr><td>&amp;copy;</td><td>&copy;</td><td>کپی‌رایت</td></tr>
+            <tr><td>&amp;reg;</td><td>&reg;</td><td>علامت ثبت‌شده</td></tr>
+            <tr><td>&amp;trade;</td><td>&trade;</td><td>تجاری</td></tr>
+            <tr><td>&amp;euro;</td><td>&euro;</td><td>یورو</td></tr>
+            <tr><td>&amp;pound;</td><td>&pound;</td><td>پوند</td></tr>
+            <tr><td>&amp;cent;</td><td>&cent;</td><td>سنت</td></tr>
+            <tr><td>&amp;deg;</td><td>&deg;</td><td>درجه</td></tr>
+            <tr><td>&amp;plusmn;</td><td>&plusmn;</td><td>به‌علاوه/منها</td></tr>
+            <tr><td>&amp;times;</td><td>&times;</td><td>ضرب</td></tr>
+            <tr><td>&amp;divide;</td><td>&divide;</td><td>تقسیم</td></tr>
+            <tr><td>&amp;frac12;</td><td>&frac12;</td><td>یک‌دوم</td></tr>
+            <tr><td>&amp;hellip;</td><td>&hellip;</td><td>سه‌نقطه</td></tr>
+            <tr><td>&amp;mdash;</td><td>&mdash;</td><td>خط تیره بلند</td></tr>
+            <tr><td>&amp;rarr; &amp;larr;</td><td>&rarr; &larr;</td><td>فلش راست/چپ</td></tr>
+            <tr><td>&amp;hearts;</td><td>&hearts;</td><td>قلب</td></tr>
+          </table>
+          <div class="box box-tip"><div class="box-title">🎯 نکته</div><p>می‌توانی از کد عددی هم استفاده کنی: <span class="kw">&amp;#169;</span> (دهدهی) یا <span class="kw">&amp;#x00A9;</span> (هگزادسیمال) هر دو © می‌سازند. این روش برای هر کاراکتر یونیکدی کار می‌کند.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ منقضی‌شده ════════ -->
+    <section class="chapter" id="ch-deprecated">
+      <div class="chapter-header">
+        <span class="chapter-badge">💀</span>
+        <div>
+          <h2>تگ‌های منقضی‌شده (Deprecated)</h2>
+          <span class="sub">تگ‌هایی که هنوز کار می‌کنند اما <strong>نباید</strong> استفاده شوند</span>
+        </div>
+      </div>
+
+      <div class="box box-danger"><div class="box-title">☠️ هشدار مهم</div><p>این تگ‌ها هنوز در اکثر مرورگرها کار می‌کنند، اما از استاندارد حذف شده‌اند. وظیفهٔ آن‌ها (اغلب استایل‌دهی) حالا بر عهدهٔ <strong>CSS</strong> است. آن‌ها را فقط برای شناخت کد قدیمی بدان — هرگز در پروژهٔ جدید استفاده نکن!</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;center&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">وسط‌چین کردن محتوا</span></div>
+        <div class="tag-card-body"><p>جایگزین مدرن: CSS <span class="kw">text-align: center</span> یا <span class="kw">margin: auto</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;font&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">تعیین فونت، رنگ و اندازه متن</span></div>
+        <div class="tag-card-body"><p>صفت‌های قدیمی: face، size، color. جایگزین: CSS <span class="kw">font-family</span>، <span class="kw">font-size</span>، <span class="kw">color</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;big&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">بزرگ‌تر کردن متن</span></div>
+        <div class="tag-card-body"><p>جایگزین: CSS <span class="kw">font-size</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;strike&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">خط روی متن</span></div>
+        <div class="tag-card-body"><p>جایگزین معنایی: <span class="kw">&lt;s&gt;</span> یا <span class="kw">&lt;del&gt;</span>، یا CSS <span class="kw">text-decoration: line-through</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;tt&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">متن تله‌تایپ (مونواسپیس)</span></div>
+        <div class="tag-card-body"><p>جایگزین: <span class="kw">&lt;code&gt;</span> یا <span class="kw">&lt;kbd&gt;</span> یا CSS <span class="kw">font-family: monospace</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;marquee&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">متن متحرک کشویی (نوستالژی دهه ۹۰!)</span></div>
+        <div class="tag-card-body"><p>متن را به‌صورت خودکار حرکت می‌داد. صفت‌ها: direction، behavior، scrollamount. جایگزین: انیمیشن CSS (<span class="kw">@keyframes</span> + transform).</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;blink&gt;</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">متن چشمک‌زن</span></div>
+        <div class="tag-card-body"><p>متن را چشمک‌زن می‌کرد. به‌خاطر آزاردهنده بودن و مشکلات دسترسی‌پذیری کاملاً کنار گذاشته شد.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">سایر صفت‌های منقضی</span><span class="tag-pill pill-dep">منقضی</span><span class="tag-desc-head">صفت‌های استایلی روی تگ‌های معمولی</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>صفت قدیمی</th><th>جایگزین CSS</th></tr>
+            <tr><td>bgcolor</td><td>background-color</td></tr>
+            <tr><td>align</td><td>text-align / float</td></tr>
+            <tr><td>border (روی img/table)</td><td>border</td></tr>
+            <tr><td>width / height (به‌جز روی img, canvas, video)</td><td>width / height در CSS</td></tr>
+            <tr><td>cellpadding / cellspacing</td><td>padding / border-spacing</td></tr>
+            <tr><td>valign</td><td>vertical-align</td></tr>
+            <tr><td>nowrap</td><td>white-space: nowrap</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ حذف‌شده ════════ -->
+    <section class="chapter" id="ch-obsolete">
+      <div class="chapter-header">
+        <span class="chapter-badge">🪦</span>
+        <div>
+          <h2>تگ‌های کاملاً حذف‌شده (Obsolete)</h2>
+          <span class="sub">تگ‌هایی که از HTML5 به‌کلی حذف شدند و دیگر پشتیبانی نمی‌شوند</span>
+        </div>
+      </div>
+
+      <div class="box box-danger"><div class="box-title">🪦 آرامگاه HTML</div><p>این تگ‌ها در گذشته بخشی از وب بودند اما کاملاً منسوخ و از استاندارد حذف شدند. مرورگرهای مدرن یا آن‌ها را نادیده می‌گیرند یا به‌عنوان متن ساده رفتار می‌کنند. این بخش <strong>صرفاً تاریخی و آموزشی</strong> است.</p></div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;acronym&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">سرنام (مخفف خوانده‌شونده)</span></div>
+        <div class="tag-card-body"><p>جایگزین: <span class="kw">&lt;abbr&gt;</span> برای همهٔ مخفف‌ها.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;applet&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">جاسازی اپلت جاوا</span></div>
+        <div class="tag-card-body"><p>جاوا اپلت‌ها منسوخ شدند. جایگزین: <span class="kw">&lt;object&gt;</span> یا فناوری‌های وب مدرن.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;basefont&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">فونت پیش‌فرض کل صفحه</span></div>
+        <div class="tag-card-body"><p>جایگزین: CSS روی body یا html.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;dir&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">لیست دایرکتوری</span></div>
+        <div class="tag-card-body"><p>جایگزین: <span class="kw">&lt;ul&gt;</span>.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;frame&gt; &lt;frameset&gt; &lt;noframes&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">سیستم قاب‌بندی قدیمی صفحه</span></div>
+        <div class="tag-card-body"><p>صفحه را به چند قاب مستقل تقسیم می‌کرد. به‌خاطر مشکلات دسترسی‌پذیری، SEO و کاربری حذف شد. جایگزین: <span class="kw">&lt;iframe&gt;</span> برای جاسازی و CSS برای چیدمان.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;isindex&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">فیلد جستجوی تک‌خطی قدیمی</span></div>
+        <div class="tag-card-body"><p>جایگزین: <span class="kw">&lt;input type="search"&gt;</span> داخل فرم.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;listing&gt; &lt;xmp&gt; &lt;plaintext&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">نمایش متن خام/کد</span></div>
+        <div class="tag-card-body"><p>برای نمایش متن بدون تفسیر تگ‌ها بودند. جایگزین: <span class="kw">&lt;pre&gt;</span> + <span class="kw">&lt;code&gt;</span> با escape کردن entityها.</p></div>
+      </div>
+
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">&lt;nextid&gt; &lt;nobr&gt; &lt;spacer&gt; &lt;multicol&gt;</span><span class="tag-pill pill-obs">حذف‌شده</span><span class="tag-desc-head">تگ‌های آزمایشی نتسکیپ/قدیمی</span></div>
+        <div class="tag-card-body">
+          <table class="ref-table attr-table">
+            <tr><th>تگ</th><th>کار قدیمی → جایگزین</th></tr>
+            <tr><td>&lt;nobr&gt;</td><td>جلوگیری از شکستن خط → CSS white-space: nowrap</td></tr>
+            <tr><td>&lt;spacer&gt;</td><td>ایجاد فاصله → CSS margin/padding</td></tr>
+            <tr><td>&lt;multicol&gt;</td><td>چندستونی → CSS columns</td></tr>
+            <tr><td>&lt;nextid&gt;</td><td>تولید id خودکار → دیگر استفاده نمی‌شود</td></tr>
+            <tr><td>&lt;bgsound&gt;</td><td>صدای پس‌زمینه → &lt;audio&gt;</td></tr>
+            <tr><td>&lt;blink&gt;</td><td>چشمک → CSS animation</td></tr>
+            <tr><td>&lt;keygen&gt;</td><td>تولید کلید رمزنگاری → API های مدرن وب</td></tr>
+            <tr><td>&lt;menuitem&gt;</td><td>آیتم منوی زمینه → حذف شد</td></tr>
+            <tr><td>&lt;rb&gt; &lt;rtc&gt;</td><td>اجزای ruby قدیمی → rt کافی است</td></tr>
+            <tr><td>&lt;hgroup&gt; (نسخه قدیم)</td><td>تعریفش تغییر کرد ولی هنوز هست</td></tr>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ آینده: CSS ════════ -->
+    <section class="chapter" id="f-css">
+      <div class="chapter-header">
+        <span class="chapter-badge">🎨</span>
+        <div>
+          <h2>قدم بعدی: CSS</h2>
+          <span class="sub">به اسکلت HTML‌ات لباس، رنگ و حرکت بده</span>
+        </div>
+      </div>
+      <div class="box box-info"><div class="box-title">💡 CSS چیست؟</div><p>HTML ساختار است (استخوان)، CSS ظاهر (پوست و لباس). با CSS رنگ، فونت، فاصله، چیدمان و انیمیشن می‌سازی. همین سندی که می‌بینی، تمام زیبایی‌اش از CSS است!</p></div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">یک نگاه به CSS</span><span class="tag-desc-head">انتخابگر، خصوصیت، مقدار</span></div>
+        <div class="tag-card-body">
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">CSS</span></div>
+<pre><code><span class="attr">.card</span> {
+  <span class="kw">background</span>: <span class="val">#0a0e27</span>;
+  <span class="kw">color</span>: <span class="val">#00e5ff</span>;
+  <span class="kw">padding</span>: <span class="val">20px</span>;
+  <span class="kw">border-radius</span>: <span class="val">16px</span>;
+  <span class="kw">transition</span>: <span class="val">transform 0.3s</span>;
+}
+<span class="attr">.card:hover</span> { <span class="kw">transform</span>: <span class="val">scale(1.05)</span>; }</code></pre></div>
+          <p>مفاهیم کلیدی بعدی: <span class="kw">Flexbox</span>، <span class="kw">Grid</span>، <span class="kw">Media Queries</span> (ریسپانسیو)، <span class="kw">انیمیشن</span> و <span class="kw">متغیرهای CSS</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ آینده: JavaScript ════════ -->
+    <section class="chapter" id="f-js">
+      <div class="chapter-header">
+        <span class="chapter-badge">⚡</span>
+        <div>
+          <h2>قدم بعدی: JavaScript</h2>
+          <span class="sub">به صفحه‌ات مغز و رفتار بده</span>
+        </div>
+      </div>
+      <div class="box box-info"><div class="box-title">💡 JS چیست؟</div><p>زبان برنامه‌نویسی وب. با آن صفحه را تعاملی می‌کنی: واکنش به کلیک، تغییر محتوا بدون رفرش، دریافت داده از سرور، انیمیشن و بازی. همان جستجو و ذرات متحرک این سند، کار JavaScript است.</p></div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">یک نگاه به JS</span><span class="tag-desc-head">تعامل با DOM</span></div>
+        <div class="tag-card-body">
+          <div class="code-block"><div class="code-head"><div class="code-dots"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div><span class="code-lang">JavaScript</span></div>
+<pre><code><span class="kw">const</span> btn = document.<span class="attr">querySelector</span>(<span class="val">'#myBtn'</span>);
+btn.<span class="attr">addEventListener</span>(<span class="val">'click'</span>, () =&gt; {
+  <span class="kw">alert</span>(<span class="val">'سلام از طرف nausea!'</span>);
+});</code></pre></div>
+          <p>مفاهیم بعدی: <span class="kw">متغیرها</span>، <span class="kw">توابع</span>، <span class="kw">حلقه‌ها</span>، <span class="kw">DOM</span>، <span class="kw">fetch API</span>، <span class="kw">async/await</span> و فریم‌ورک‌ها (<span class="kw">React</span>، <span class="kw">Vue</span>).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ آینده: Backend ════════ -->
+    <section class="chapter" id="f-back">
+      <div class="chapter-header">
+        <span class="chapter-badge">🗄️</span>
+        <div>
+          <h2>قدم بعدی: Backend</h2>
+          <span class="sub">سمت سرور — جایی که داده‌ها زندگی می‌کنند</span>
+        </div>
+      </div>
+      <div class="box box-info"><div class="box-title">💡 Backend چیست؟</div><p>چیزی که کاربر نمی‌بیند: سرور، پایگاه‌داده، احراز هویت و منطق برنامه. وقتی لاگین می‌کنی یا خرید می‌کنی، بک‌اند کار را انجام می‌دهد.</p></div>
+      <div class="tag-card">
+        <div class="tag-card-head"><span class="tag-name">دنیای سرور</span><span class="tag-desc-head">زبان‌ها و پایگاه‌داده</span></div>
+        <div class="tag-card-body">
+          <p>زبان‌های محبوب: <span class="kw">Node.js (JavaScript)</span>، <span class="kw">Python</span>، <span class="kw">PHP</span>، <span class="kw">Go</span>. پایگاه‌داده‌ها: <span class="kw">PostgreSQL</span>، <span class="kw">MySQL</span>، <span class="kw">MongoDB</span>. مفاهیم: <span class="kw">API</span>، <span class="kw">REST</span>، <span class="kw">احراز هویت</span> و <span class="kw">امنیت</span>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════ آینده: Full-Stack ════════ -->
+    <section class="chapter" id="f-full">
+      <div class="chapter-header">
+        <span class="chapter-badge">🚀</span>
+        <div>
+          <h2>مقصد نهایی: Full-Stack</h2>
+          <span class="sub">وقتی همهٔ قطعات کنار هم می‌نشینند</span>
+        </div>
+      </div>
+      <div class="box box-tip"><div class="box-title">🎯 مسیر تو</div><p>برنامه‌نویس Full-Stack هم فرانت (HTML/CSS/JS) و هم بک (سرور/دیتابیس) را بلد است. مسیر پیشنهادی: <strong>HTML → CSS → JavaScript → یک فریم‌ورک فرانت → یک زبان بک‌اند → دیتابیس → دیپلوی</strong>. تو همین حالا قدم اول و مهم‌ترین قدم را برداشتی!</p></div>
+      <div class="signoff">
+        <div class="signoff-glow"></div>
+        <h3>پایان سفر، شروع راه تو ✨</h3>
+        <p>این دایره‌المعارف تمام تگ‌های HTML — از پرکاربردترین تا منقضی و حذف‌شده — را برایت گرد آورد. حالا نوبت توست که با دست‌های خودت وب بسازی. هر استاد بزرگی، روزی یک مبتدی بود که هرگز تسلیم نشد.</p>
+        <div class="signoff-author">
+          <span class="signoff-label">با عشق، از طرف</span>
+          <span class="signoff-name">NAUSEA</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p class="gradient-text">⚡ این کامل‌ترین مرجع HTML فارسی است که در اختیار داری</p>
+      <p style="margin-top:14px;">کاملاً آفلاین — بدون نیاز به اینترنت یا هیچ ابزار دیگری. هر وقت تگی را فراموش کردی، اینجا را باز کن.</p>
+      <p class="sig">ساخته‌شده با ❤️ و کافئین از طرف <b>NAUSEA</b></p>
+    </footer>
+  </main>
+</div>
+
+<button class="to-top" id="toTop" aria-label="بازگشت به بالا">↑</button>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ذرات شناور پس‌زمینه
+(function(){
+  const colors = ['#22d3ee','#a78bfa','#f472b6'];
+  for(let i=0;i<14;i++){
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random()*4+2;
+    p.style.width = p.style.height = size+'px';
+    p.style.left = Math.random()*100+'vw';
+    p.style.color = colors[i%3];
+    p.style.background = colors[i%3];
+    p.style.animationDuration = (Math.random()*20+15)+'s';
+    p.style.animationDelay = (Math.random()*15)+'s';
+    document.body.appendChild(p);
+  }
+})();
+
+// نوار پیشرفت + دکمه بالا
+const progressBar = document.getElementById('progressBar');
+const toTop = document.getElementById('toTop');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progressBar.style.width = scrolled + '%';
+  toTop.classList.toggle('show', h.scrollTop > 500);
+});
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// منوی موبایل
+const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menuToggle');
+const overlay = document.getElementById('overlay');
+function closeMenu(){ sidebar.classList.remove('open'); overlay.classList.remove('show'); }
+menuToggle.addEventListener('click', () => { sidebar.classList.toggle('open'); overlay.classList.toggle('show'); });
+overlay.addEventListener('click', closeMenu);
+
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(link => link.addEventListener('click', () => { if (window.innerWidth <= 1024) closeMenu(); }));
+
+// فعال‌سازی لینک هنگام اسکرول + انیمیشن ظاهر شدن فصل‌ها
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const id = entry.target.id;
+      if(id) navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    }
+  });
+}, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }});
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.chapter').forEach(s => { observer.observe(s); fadeObserver.observe(s); });
+
+// ═══ جستجوی زنده ═══
+const searchInput = document.getElementById('searchInput');
+const searchCount = document.getElementById('searchCount');
+const chapters = document.querySelectorAll('.chapter');
+searchInput.addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  if(!q){
+    chapters.forEach(c => { c.classList.remove('search-hidden'); });
+    searchCount.style.display = 'none';
+    return;
+  }
+  let found = 0;
+  chapters.forEach(c => {
+    const txt = c.textContent.toLowerCase();
+    if(txt.includes(q)){ c.classList.remove('search-hidden'); found++; }
+    else { c.classList.add('search-hidden'); }
+  });
+  searchCount.style.display = 'block';
+  searchCount.textContent = found > 0 ? `✓ ${found} فصل پیدا شد` : '✗ چیزی پیدا نشد';
+});
+</script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
