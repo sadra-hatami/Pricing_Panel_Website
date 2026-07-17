@@ -21,6 +21,7 @@ A modern HTML encyclopedia documenting the complete evolution of HTML—from cla
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge\&logo=css3\&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge\&logo=javascript\&logoColor=black)
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-success?style=for-the-badge)
+![Cross Platform](https://img.shields.io/badge/Cross--Platform-Desktop%20%7C%20Laptop%20%7C%20Tablet%20%7C%20Mobile-6f42c1?style=for-the-badge)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-blue?style=for-the-badge\&logo=github)
 
 </p>
