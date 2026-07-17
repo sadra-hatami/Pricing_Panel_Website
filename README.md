@@ -1,6 +1,7 @@
 <div align="center">
 
-# 📚 HTML Encyclopedia
+# HTML Encyclopedia
+# 📚💡📚
 
 ### The Ultimate HTML Reference Website
 
@@ -28,10 +29,8 @@ A modern HTML encyclopedia documenting the complete evolution of HTML—from cla
 
 <br>
 
-[🌐 Live Demo](https://sadra-hatami.github.io/HTML-Encyclopedia-Website/) •
-[🐞 Report Bug](../../issues) •
-[💡 Request Feature](../../issues)
-
+[🌐 Live Demo](https://sadra-hatami.github.io/HTML-Encyclopedia-Website/)    
+[📧 Support](mailto:mathematics.toolbox.sadra@gmail.com)
 </div>
 
 ---
@@ -158,6 +157,6 @@ Your support helps the project reach more developers and encourages future impro
 
 <div align="center">
 
-## ❤️ Developed with passion by **Sadra Hatami**
+## Designed & Developed with ❤️ for the developer community of Iran and the world by **Sadra Hatami**
 
 </div>
