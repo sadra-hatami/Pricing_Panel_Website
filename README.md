@@ -95,17 +95,6 @@ https://sadra-hatami.github.io/HTML-Encyclopedia-Website/
 
 ---
 
-# 📂 Project Structure
-
-```text
-HTML-Encyclopedia-Website/
-│
-├── index.html
-└── README.md
-```
-
----
-
 # 🎓 Target Audience
 
 * Students
@@ -142,9 +131,14 @@ Feel free to open an Issue or submit a Pull Request.
 
 # 📬 Contact
 
+**Developer:**
+
 ### Sadra Hatami
 
-📧 Email: **[sadra.hatami.1732@gmail.com](mailto:sadra.hatami.1732@gmail.com)**
+📧 [Email](mailto:sadra.hatami.1732@gmail.com)
+
+
+🌐 [GitHub](https://github.com/sadra-hatami)
 
 ---
 
